@@ -25,6 +25,8 @@ export const metadata: Metadata = {
     generator: 'v0.app'
 }
 
+import { SmoothScrolling } from "@/components/smooth-scrolling"
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -33,7 +35,9 @@ export default function RootLayout({
   return (
     <html lang="ca" className={`${inter.variable} ${poppins.variable}`}>
       <body className="font-sans antialiased bg-gray-50">
-        <Suspense fallback={null}>{children}</Suspense>
+        <SmoothScrolling>
+          <Suspense fallback={null}>{children}</Suspense>
+        </SmoothScrolling>
       </body>
     </html>
   )

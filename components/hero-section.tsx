@@ -1,79 +1,152 @@
-import { Button } from "@/components/ui/button"
-import { ArrowRight, Clock, Shield, MapPin } from "lucide-react"
+﻿"use client"
+
+import { useEffect, useRef } from "react"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import Link from "next/link"
+import { ArrowUpRight } from "lucide-react"
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger)
+}
 
 export function HeroSection() {
+  const containerRef = useRef<HTMLElement>(null)
+  const imageRef = useRef<HTMLDivElement>(null)
+  const text1Ref = useRef<HTMLHeadingElement>(null)
+  const text2Ref = useRef<HTMLHeadingElement>(null)
+  const text3Ref = useRef<HTMLHeadingElement>(null)
+  const descRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      
+      // 1. Animación de Entrada Inicial
+      // En vez de fromTo que "bloquea" los estilos iniciales, seteamos los estilos de entrada 
+      // y animamos HASTA el estado base (el que hereda luego el ScrollTrigger)
+      gsap.set(imageRef.current, { width: "0vw", height: "0vh", borderRadius: "100px" })
+      
+      const introTl = gsap.timeline()
+      introTl.to(imageRef.current, {
+        width: "30vw", height: "40vh", borderRadius: "24px", duration: 1.8, ease: "power4.out" 
+      })
+      
+      gsap.fromTo(descRef.current,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 1.5, delay: 1.2, ease: "power3.out" }
+      )
+
+      // 2. Animación de Scroll (Pin & Scale)
+      // Enlazamos este timeline PARA QUE EMPIECE DE LAS MEDIDAS EXACTAS DE ARRIBA
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "+=150%",
+          scrub: 1,
+          pin: true,
+        }
+      })
+
+      // Le decimos explicitly start at 30vw/40vh and end at 100vw/100vh
+      tl.fromTo(imageRef.current, 
+        {
+          width: "30vw",
+          height: "40vh",
+          borderRadius: "24px",
+        },
+        {
+          width: "100vw",
+          height: "100vh",
+          borderRadius: "0px",
+          ease: "none",
+        }, 
+      0)
+
+      tl.to([text1Ref.current, text2Ref.current, text3Ref.current], {
+        opacity: 0,
+        y: -100,
+        stagger: 0.1,
+        ease: "power2.inOut"
+      }, 0)
+    }, containerRef)
+
+    return () => ctx.revert()
+  }, [])
+
   return (
-    <section className="relative hero-gradient py-20 lg:py-32 border-b">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Content */}
-          <div className="space-y-8">
-            <div className="space-y-6">
-              <h1 className="text-4xl lg:text-6xl font-bold text-foreground leading-tight">
-                Transport professional a <span className="text-primary">Catalunya</span>
-              </h1>
-              <p className="text-xl text-secondary-foreground/80 leading-relaxed max-w-2xl">
-                Més de 15 anys d'experiència oferint serveis de transport convencional i urgent amb una flota completa
-                de furgonetes a camions de 38 metres.
-              </p>
-            </div>
+    <section ref={containerRef} className="relative w-full h-screen bg-[#0a0a0a] flex flex-col items-center justify-center overflow-hidden">
+      
+      {/* Editoriales verticales */}
+      <div className="hidden md:flex absolute top-1/2 left-8 -translate-y-1/2 z-20 mix-blend-difference rotate-180" style={{ writingMode: 'vertical-rl' }}>
+        <p className="text-[#e8e8e5] text-[10px] uppercase tracking-[0.4em] font-mono whitespace-nowrap">
+          Des de 2009 — Collbató, BCN
+        </p>
+      </div>
 
-            {/* Features */}
-            <div className="grid sm:grid-cols-3 gap-6">
-              <div className="flex items-center space-x-3 bg-white/60 p-4 rounded-lg">
-                <Clock className="h-6 w-6 text-primary" />
-                <span className="text-sm font-medium text-foreground">Servei 24h</span>
-              </div>
-              <div className="flex items-center space-x-3 bg-white/60 p-4 rounded-lg">
-                <Shield className="h-6 w-6 text-primary" />
-                <span className="text-sm font-medium text-foreground">Totalment assegurat</span>
-              </div>
-              <div className="flex items-center space-x-3 bg-white/60 p-4 rounded-lg">
-                <MapPin className="h-6 w-6 text-primary" />
-                <span className="text-sm font-medium text-foreground">Nacional i internacional</span>
-              </div>
-            </div>
+      <div className="hidden md:flex absolute top-1/2 right-8 -translate-y-1/2 z-20 mix-blend-difference" style={{ writingMode: 'vertical-rl' }}>
+        <p className="text-[#e8e8e5] text-[10px] uppercase tracking-[0.4em] font-mono whitespace-nowrap">
+          Servei Nacional i Internacional
+        </p>
+      </div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white text-lg px-8 h-14">
-                Sol·licitar pressupost
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="text-lg px-8 h-14 border-2 border-primary text-primary hover:bg-primary hover:text-white bg-transparent"
-              >
-                Veure la nostra flota
-              </Button>
-            </div>
-          </div>
-
-          {/* Hero Image */}
-          <div className="relative">
-            <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
-              <img
-                src="/modern-truck-fleet-on-highway-professional-transpo.jpg"
-                alt="Flota de camions FJM Transportes"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="absolute -bottom-6 -left-6 bg-white rounded-xl p-6 shadow-xl border-2 border-primary/10">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary">15+</div>
-                <div className="text-sm font-medium text-foreground">Anys d'experiència</div>
-              </div>
-            </div>
-            <div className="absolute -top-6 -right-6 bg-white rounded-xl p-6 shadow-xl border-2 border-primary/10">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary">24/7</div>
-                <div className="text-sm font-medium text-foreground">Servei disponible</div>
-              </div>
-            </div>
-          </div>
+      <div className="relative z-10 w-full flex flex-col items-center justify-center pointer-events-none mix-blend-difference">
+        <h1 ref={text1Ref} className="text-[#e8e8e5] text-[15vw] leading-[0.8] font-black uppercase tracking-tighter text-center m-0">
+          Transport
+        </h1>
+        
+        <div className="flex items-center justify-center gap-4 lg:gap-8 w-full">
+          <h1 ref={text2Ref} className="text-[#e8e8e5] text-[15vw] leading-[0.8] font-black uppercase tracking-tighter m-0 italic font-serif">
+            &
+          </h1>
+          <h1 ref={text3Ref} className="text-[#e8e8e5] text-[15vw] leading-[0.8] font-black uppercase tracking-tighter m-0" style={{ WebkitTextStroke: "2px #e8e8e5", color: "transparent" }}>
+            Logística
+          </h1>
         </div>
       </div>
+
+      {/* Video Central */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 flex justify-center items-center">
+        <div 
+          ref={imageRef}
+          className="overflow-hidden relative bg-[#05090f] flex justify-center items-center"
+          style={{ width: "30vw", height: "40vh", borderRadius: "24px" }}
+        >
+          <video 
+            src="/hero.mp4" 
+            autoPlay 
+            muted 
+            loop 
+            playsInline
+            className="w-[100vw] h-[100vh] object-cover scale-105 pointer-events-none max-w-none"
+          />
+          <div className="absolute inset-0 bg-black/30 mix-blend-overlay" />
+        </div>
+      </div>
+
+      <div ref={descRef} className="absolute bottom-12 z-20 w-full px-8 flex justify-between items-end mix-blend-difference opacity-0">
+        <p className="max-w-md text-[#e8e8e5] text-sm md:text-base font-medium uppercase font-mono tracking-wide leading-relaxed">
+          Som una empresa versàtil en constant evolució i desenvolupament, 
+          oferint solucions especialitzades en transports convencionals i serveis urgents.
+        </p>
+
+        <Link 
+          href="#contacte" 
+          className="group relative h-14 md:h-16 bg-[#e8e8e5] text-[#05090f] overflow-hidden rounded-full flex items-center justify-between px-6 gap-6 md:px-8 md:gap-8"
+        >
+          <span className="relative z-10 text-sm md:text-xl font-black uppercase tracking-tighter group-hover:text-white transition-colors duration-500">
+            Pressupost
+          </span>
+          
+          <div className="relative z-10 w-10 h-10 rounded-full bg-[#05090f] flex items-center justify-center overflow-hidden group-hover:bg-white transition-colors duration-500 shrink-0">
+            <ArrowUpRight className="w-5 h-5 text-[#e8e8e5] absolute group-hover:translate-x-8 group-hover:-translate-y-8 transition-transform duration-500" />
+            <ArrowUpRight className="w-5 h-5 text-[#05090f] absolute -translate-x-8 translate-y-8 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-500" />
+          </div>
+
+          <div className="absolute inset-0 bg-primary transform translate-y-full rounded-[50%] group-hover:translate-y-0 group-hover:rounded-none transition-all duration-700 ease-[cubic-bezier(0.83,0,0.17,1)] z-0" />
+        </Link>
+      </div>
+
     </section>
   )
 }

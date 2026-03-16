@@ -1,5 +1,6 @@
 import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
+import { Truck3DSection } from "@/components/truck-3d-section"
 import { ServicesSection } from "@/components/services-section"
 import { FleetSection } from "@/components/fleet-section"
 import { AboutSection } from "@/components/about-section"
@@ -11,6 +12,7 @@ export default function HomePage() {
     <main className="min-h-screen">
       <Header />
       <HeroSection />
+      {/* <Truck3DSection /> */}
       <ServicesSection />
       <FleetSection />
       <AboutSection />
