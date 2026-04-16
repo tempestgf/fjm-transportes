@@ -134,28 +134,36 @@ export function ContactSection() {
         <div className="flex flex-col lg:flex-row w-full flex-1">
           
           {/* Lado Izquierdo: Datos de contacto estilizados */}
-          <div className="info-wrapper lg:w-1/3 border-b lg:border-b-0 lg:border-r border-white/10 py-16 lg:py-24 lg:pr-16 flex flex-col gap-16">
+          <div className="info-wrapper lg:w-1/3 border-b lg:border-b-0 lg:border-r border-white/10 py-16 lg:py-24 lg:pr-16 flex flex-col gap-10">
             
             <div className="anim-info-block group">
-              <h4 className="font-mono text-xs uppercase tracking-[0.3em] text-white/40 mb-4">Email</h4>
-              <a href="mailto:info@fjm-transports.com" className="text-3xl lg:text-4xl font-light tracking-tight hover:text-primary transition-colors duration-500">
-                info@fjm-transports.com
+              <h4 className="font-mono text-xs uppercase tracking-[0.3em] text-white/40 mb-4">Email (Comercial)</h4>
+              <a href="mailto:fjm@fjmtransportes.com" className="text-2xl lg:text-3xl font-light tracking-tight hover:text-primary transition-colors duration-500 hover:break-all overflow-hidden break-all">
+                fjm@fjmtransportes.com
               </a>
             </div>
 
             <div className="anim-info-block group">
-              <h4 className="font-mono text-xs uppercase tracking-[0.3em] text-white/40 mb-4">Telèfon</h4>
-              <a href="tel:+34931234567" className="text-3xl lg:text-4xl font-light tracking-tight hover:text-primary transition-colors duration-500">
-                +34 93 123 45 67
-              </a>
+              <h4 className="font-mono text-xs uppercase tracking-[0.3em] text-white/40 mb-4">Telèfons Principals</h4>
+              <div className="flex flex-col gap-2">
+                <a href="tel:+34937775332" className="text-2xl lg:text-3xl font-light tracking-tight hover:text-primary transition-colors duration-500">
+                  <span className="text-white/40 text-lg mr-2 font-mono">Oficina:</span>937 77 53 32
+                </a>
+                <a href="tel:+34687942642" className="text-2xl lg:text-3xl font-light tracking-tight hover:text-primary transition-colors duration-500">
+                  <span className="text-white/40 text-lg mr-2 font-mono">Trànsit:</span>+34 687 94 26 42
+                </a>
+              </div>
             </div>
 
-            <div className="anim-info-block group">
-              <h4 className="font-mono text-xs uppercase tracking-[0.3em] text-white/40 mb-4">Seu Central</h4>
-              <p className="text-2xl lg:text-3xl font-light tracking-tight text-white/80 leading-relaxed">
-                Polígon Industrial<br/>
-                08293 Collbató<br/>
-                Barcelona
+            <div className="anim-info-block group mt-6 border-t border-white/10 pt-8">
+              <h4 className="font-mono text-xs uppercase tracking-[0.3em] text-white/40 mb-4">Seu i Magatzem</h4>
+              <p className="text-xl lg:text-2xl font-light tracking-tight text-white/80 leading-relaxed mb-4">
+                Carrer Tres Rieres, Nave 20<br/>
+                Polígon Industrial La Magarola<br/>
+                08292 Esparreguera, Barcelona
+              </p>
+              <p className="text-sm font-light text-white/40">
+                1.100 m2 per a transport i emmagatzematge de mercaderies.
               </p>
             </div>
 

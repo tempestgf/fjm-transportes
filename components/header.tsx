@@ -141,7 +141,7 @@ export function Header() {
         {/* Menu Footer Reducido */}
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-start md:items-end w-full gap-8">
           <div className="overflow-hidden pb-2">
-            <a href="mailto:fjm@fjmtransportes.com" className="menu-item text-[#e8e8e5] text-2xl md:text-4xl font-light hover:italic transition-all">
+            <a href="mailto:fjm@fjmtransportes.com" className="menu-item text-[#e8e8e5] text-2xl md:text-3xl font-light hover:italic transition-all">
               fjm@fjmtransportes.com
             </a>
           </div>

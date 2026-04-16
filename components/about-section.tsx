@@ -150,7 +150,7 @@ export function AboutSection() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-lg lg:text-xl font-light text-[#05090f]/80 leading-relaxed">
               <p className="reveal-text">
-                <strong className="font-bold text-[#05090f]">FJM Transports</strong> és una empresa de transports especialitzada en transports convencionals i serveis urgents. Amb seu a <strong className="text-primary font-bold">Collbató (Barcelona)</strong>, oferim serveis d'abast nacional i internacional garantint màxima confiança.
+                <strong className="font-bold text-[#05090f]">FJM Transportes</strong> és una empresa de transports especialitzada en transports convencionals i serveis urgents. Amb seu a <strong className="text-primary font-bold">Esparreguera (Barcelona)</strong>, oferim serveis d'abast nacional i internacional garantint màxima confiança.
               </p>
               <div className="flex flex-col gap-8">
                 <p className="reveal-text">
@@ -175,7 +175,7 @@ export function AboutSection() {
               <path id="circlePathAbout" d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" fill="none" />
               <text className="text-[10px] font-mono uppercase tracking-[0.22em] fill-[#05090f] font-bold">
                 <textPath href="#circlePathAbout">
-                  • FJM Transports • Experiència i Seguretat
+                  • FJM Transportes • Experiencia y Seguridad
                 </textPath>
               </text>
             </svg>

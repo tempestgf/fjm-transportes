@@ -80,15 +80,15 @@ export function Footer() {
               
               <div className="footer-link group">
                 <h4 className="font-mono text-xs uppercase tracking-[0.3em] text-white/40 mb-4">Email</h4>
-                <a href="mailto:info@fjm-transports.com" className="text-3xl lg:text-4xl font-light tracking-tight hover:text-primary transition-colors duration-500">
-                  info@fjm-transports.com
+                <a href="mailto:fjm@fjmtransportes.com" className="text-2xl lg:text-3xl font-light tracking-tight hover:text-primary transition-colors duration-500">
+                  fjm@fjmtransportes.com
                 </a>
               </div>
 
               <div className="footer-link group">
-                <h4 className="font-mono text-xs uppercase tracking-[0.3em] text-white/40 mb-4">Telèfon</h4>
-                <a href="tel:+34931234567" className="text-3xl lg:text-4xl font-light tracking-tight hover:text-primary transition-colors duration-500">
-                  +34 93 123 45 67
+                <h4 className="font-mono text-xs uppercase tracking-[0.3em] text-white/40 mb-4">Telèfon (Oficina)</h4>
+                <a href="tel:+34937775332" className="text-3xl lg:text-4xl font-light tracking-tight hover:text-primary transition-colors duration-500">
+                  937 77 53 32
                 </a>
               </div>
 
@@ -97,13 +97,25 @@ export function Footer() {
             {/* Lado Derecho: Sede y Botón Top */}
             <div className="lg:w-2/3 flex flex-col justify-between pt-16 lg:pt-24 pl-0 lg:pl-16">
               
-              <div className="footer-link group">
-                <h4 className="font-mono text-xs uppercase tracking-[0.3em] text-white/40 mb-4">Seu Central</h4>
-                <p className="text-2xl lg:text-3xl font-light tracking-tight text-white/80 leading-relaxed">
-                  Polígon Industrial<br/>
-                  08293 Collbató<br/>
-                  Barcelona
-                </p>
+              <div className="footer-link group flex gap-12">
+                <div className="flex-1">
+                  <h4 className="font-mono text-xs uppercase tracking-[0.3em] text-white/40 mb-4">Seu Central</h4>
+                  <p className="text-xl lg:text-2xl font-light tracking-tight text-white/80 leading-relaxed">
+                    C/ Tres Rieres, Nau 20<br/>
+                    Polígon Industrial La Magarola<br/>
+                    08292 Esparreguera, Barcelona<br/>
+                    NIF: B66139247
+                  </p>
+                </div>
+                <div className="flex-1 hidden md:block">
+                  <h4 className="font-mono text-xs uppercase tracking-[0.3em] text-white/40 mb-4">Més Contactes</h4>
+                  <div className="text-sm font-light text-white/60 space-y-2">
+                    <p><strong>Trànsit:</strong> +34 687 94 26 42 / fjmtrafico@fjmtransportes.com</p>
+                    <p><strong>Comercial:</strong> +34 669 42 23 75</p>
+                    <p><strong>Admin:</strong> +34 669 42 23 50 / administracion@administracionfjmtransportes.com</p>
+                    <p><strong>Magatzem:</strong> +34 616 71 94 66 / trafico2@fjmtransportes.com</p>
+                  </div>
+                </div>
               </div>
 
               <div className="footer-link mt-12 w-full max-w-2xl">
@@ -127,19 +139,19 @@ export function Footer() {
             </div>
         </div>
 
-        {/* FJM TRANSPORTS TITLE MASIVO Brutalista */}
+        {/* FJM TRANSPORTE TITLE MASIVO Brutalista */}
         <div className="w-full flex flex-col items-center justify-center py-16 lg:py-24" ref={hugeTextRef}>
-          <h2 className="text-[22vw] sm:text-[18vw] md:text-[15vw] lg:text-[11vw] xl:text-[10vw] leading-[0.85] font-black uppercase tracking-tighter flex flex-col items-center text-center w-full max-w-[100vw] px-4 overflow-visible">
+          <h2 className="text-[22vw] sm:text-[18vw] md:text-[15vw] lg:text-[9vw] xl:text-[8vw] leading-[0.85] font-black uppercase tracking-tighter flex flex-col items-center text-center w-full max-w-[100vw] px-4 overflow-visible">
             <span className="text-white block px-4">FJM</span>
             <span className="text-transparent block px-4 whitespace-nowrap" style={{ WebkitTextStroke: "min(3px, 0.4vw) rgba(255,255,255,0.8)" }}>
-              TRANSPORTS<span className="text-primary" style={{ WebkitTextStroke: "0px" }}>.</span>
+              TRANSPORTES<span className="text-primary" style={{ WebkitTextStroke: "0px" }}>.</span>
             </span>
           </h2>
         </div>
 
         {/* Footer legal minimalista */}
         <div className="footer-link w-full border-t border-white/10 py-6 flex flex-col md:flex-row justify-between items-center text-white/30 font-mono text-xs uppercase tracking-widest z-10 mt-auto">
-           <p>© {new Date().getFullYear()} FJM Transports. Tots els drets reservats.</p>
+           <p>© {new Date().getFullYear()} FJM Transportes. Tots els drets reservats.</p>
            <div className="flex gap-6 mt-4 md:mt-0">
              <a href="#" className="hover:text-white transition-colors duration-300">Avís Legal</a>
              <a href="#" className="hover:text-white transition-colors duration-300">Privacitat</a>
