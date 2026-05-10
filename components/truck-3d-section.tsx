@@ -143,11 +143,11 @@ export function Truck3DSection() {
   }, [modelLoaded])
 
   return (
-    <section ref={containerRef} className="relative w-full h-screen bg-[#05090f] overflow-hidden">
+    <section ref={containerRef} className="relative w-full h-screen bg-[#000000] overflow-hidden">
       
       {/* Decoración Ambiental */}
       <div className="absolute top-1/4 right-0 w-[40vw] h-[40vw] bg-primary/20 rounded-full blur-[150px] mix-blend-screen pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[50vw] h-[50vw] bg-blue-900/20 rounded-full blur-[120px] mix-blend-screen pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[50vw] h-[50vw] bg-[#223560]/20 rounded-full blur-[120px] mix-blend-screen pointer-events-none" />
 
       {/* TEXTO FLOTANTE UI */}
       <div className="absolute inset-0 z-10 pointer-events-none container mx-auto px-4 sm:px-6 lg:px-8">
@@ -155,10 +155,10 @@ export function Truck3DSection() {
         {/* SCENE 1 TEXT */}
         <div ref={text1Ref} className="absolute top-[25%] left-4 lg:left-12 max-w-xl md:top-1/3">
           <p className="text-primary font-bold tracking-[0.3em] text-xs md:text-sm uppercase mb-3">Especialistes</p>
-          <h2 className="text-5xl md:text-7xl lg:text-[90px] font-black text-white uppercase leading-[0.85] tracking-tighter mb-6 drop-shadow-2xl">
+          <h2 className="text-5xl md:text-7xl lg:text-[90px] font-black text-[#ffffff] uppercase leading-[0.85] tracking-tighter mb-6 drop-shadow-2xl">
             Logística <br/><span className="text-transparent" style={{ WebkitTextStroke: "2px rgba(255,255,255,0.9)" }}>A Mida</span>
           </h2>
-          <p className="text-slate-300 font-light text-lg border-l-2 border-primary pl-4 backdrop-blur-sm bg-black/10 rounded-r-xl py-2">
+          <p className="text-[#ffffff]/80 font-light text-lg border-l-2 border-primary pl-4 backdrop-blur-sm bg-[#000000]/10 rounded-r-xl py-2">
             Traslladem allò que d'altres no poden. Plataformes expansibles i vehicles especialitzats per a maquinària d'obra.
           </p>
         </div>
@@ -166,10 +166,10 @@ export function Truck3DSection() {
         {/* SCENE 2 TEXT */}
         <div ref={text2Ref} className="absolute top-[30%] -translate-y-1/2 right-4 lg:right-12 max-w-xl text-right md:top-1/2">
           <p className="text-primary font-bold tracking-[0.3em] text-xs md:text-sm uppercase mb-3">Potència i Fiabilitat</p>
-          <h2 className="text-5xl md:text-7xl lg:text-[90px] font-black text-white uppercase leading-[0.85] tracking-tighter mb-6 drop-shadow-2xl">
+          <h2 className="text-5xl md:text-7xl lg:text-[90px] font-black text-[#ffffff] uppercase leading-[0.85] tracking-tighter mb-6 drop-shadow-2xl">
             Fins a <br/><span className="text-transparent" style={{ WebkitTextStroke: "2px rgba(255,255,255,0.9)" }}>90 Tones</span>
           </h2>
-          <p className="text-slate-300 font-light text-lg border-r-2 border-primary pr-4 backdrop-blur-sm bg-black/10 rounded-l-xl py-2 ml-auto">
+          <p className="text-[#ffffff]/80 font-light text-lg border-r-2 border-primary pr-4 backdrop-blur-sm bg-[#000000]/10 rounded-l-xl py-2 ml-auto">
             Disposant d'una àmplia flota amb camions grues amb plomes de 38 metres i plataformes extensibles exclusives.
           </p>
         </div>
@@ -178,10 +178,10 @@ export function Truck3DSection() {
         <div ref={text3Ref} className="absolute top-1/3 left-1/2 -translate-x-1/2 max-w-3xl text-center w-full px-4 flex flex-col items-center">
           <div className="w-px h-16 bg-primary mb-4 hidden md:block"></div>
           <p className="text-primary font-bold tracking-[0.3em] text-xs md:text-sm uppercase mb-3">Rendiment Connectat</p>
-          <h2 className="text-5xl md:text-8xl lg:text-[120px] font-black text-white uppercase leading-[0.85] tracking-tighter mb-6 drop-shadow-2xl">
+          <h2 className="text-5xl md:text-8xl lg:text-[120px] font-black text-[#ffffff] uppercase leading-[0.85] tracking-tighter mb-6 drop-shadow-2xl">
             Ruta sense <br/><span className="text-transparent" style={{ WebkitTextStroke: "2px rgba(255,255,255,0.9)" }}>Límits</span>
           </h2>
-          <p className="text-slate-300 font-light text-xl md:text-2xl max-w-2xl mx-auto backdrop-blur-sm bg-black/10 rounded-xl py-2 px-6">
+          <p className="text-[#ffffff]/80 font-light text-xl md:text-2xl max-w-2xl mx-auto backdrop-blur-sm bg-[#000000]/10 rounded-xl py-2 px-6">
             Lliuraments nacionals i internacionals. Experiència, control i puntualitat en cadascun dels quilòmetres.
           </p>
         </div>
@@ -190,7 +190,7 @@ export function Truck3DSection() {
       {/* EVENTO 3D */}
       <div className="absolute inset-0 z-0 h-full w-full cursor-grab active:cursor-grabbing">
         <Canvas camera={{ position: [0, 2, 12], fov: 40 }} dpr={[1, 2]}>
-          <fog attach="fog" args={['#05090f', 5, 22]} />
+          <fog attach="fog" args={['#000000', 5, 22]} />
           
           {/* Luces cinematográficas */}
           <ambientLight intensity={0.4} />
@@ -200,9 +200,9 @@ export function Truck3DSection() {
           
           <Suspense fallback={
             <Html center>
-              <div className="flex flex-col items-center gap-4 bg-[#05090f]/90 p-8 rounded-2xl backdrop-blur-md">
+              <div className="flex flex-col items-center gap-4 bg-[#000000]/90 p-8 rounded-2xl backdrop-blur-md">
                 <div className="w-12 h-12 border-4 border-slate-700 border-t-primary rounded-full animate-spin"></div>
-                <span className="text-white text-xs tracking-[0.2em] uppercase font-bold">Generant actiu 3D...</span>
+                <span className="text-[#ffffff] text-xs tracking-[0.2em] uppercase font-bold">Generant actiu 3D...</span>
               </div>
             </Html>
           }>

@@ -1,9 +1,10 @@
-﻿"use client"
+"use client"
 
 import { useState, useEffect, useRef } from "react"
 import { Menu, X } from "lucide-react"
 import gsap from "gsap"
 import Link from "next/link"
+import Image from "next/image"
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -61,31 +62,36 @@ export function Header() {
         <div className="flex items-center justify-between w-full pointer-events-auto">
           
           {/* Logo Minimalista */}
-          <a href="#" className="relative z-[110] flex items-center text-[#e8e8e5] group" onClick={() => setIsMenuOpen(false)}>
-            <span className="font-mono tracking-[0.3em] text-sm uppercase flex items-center gap-4">
-              FJM <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:inline">Transports</span>
-            </span>
+          <a href="#" className="relative z-[110] flex items-center group" onClick={() => setIsMenuOpen(false)}>
+            <Image
+              src="/FJM_LOGO.png"
+              alt="FJM Transportes"
+              width={180}
+              height={72}
+              priority
+              className="h-9 w-auto object-contain md:h-10"
+            />
           </a>
 
           {/* Toggle Menu Button Brutalista */}
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="group relative z-[110] h-12 w-12 md:h-14 md:w-auto bg-[#e8e8e5] text-[#05090f] overflow-hidden rounded-full flex items-center justify-center md:justify-between p-1 md:px-6 md:gap-6"
+            className="anti-alias-btn mix-blend-normal group relative z-[110] h-12 w-12 md:h-14 md:w-auto bg-[#ffffff] text-[#000000] overflow-hidden rounded-full flex items-center justify-center md:justify-between p-1 md:px-6 md:gap-6 transition-colors duration-500 border border-[#000000]/10 shadow-sm"
           >
-            <span className="relative z-10 text-sm font-black uppercase tracking-tighter group-hover:text-white transition-colors duration-500 hidden md:block">
+            <span className="relative z-10 text-sm font-black uppercase tracking-tighter group-hover:text-[#ffffff] transition-colors duration-500 hidden md:block">
               {isMenuOpen ? "Tancar" : "Menú"}
             </span>
             
-            <div className="relative z-10 w-10 h-10 rounded-full bg-[#05090f] flex items-center justify-center overflow-hidden group-hover:bg-white transition-colors duration-500 shrink-0">
-              <div className="absolute flex items-center justify-center text-[#e8e8e5] group-hover:translate-x-8 group-hover:-translate-y-8 transition-transform duration-500">
+            <div className="relative z-10 w-10 h-10 rounded-full bg-primary group-hover:bg-[#ffffff] flex items-center justify-center overflow-hidden transition-colors duration-500 shrink-0 border border-[#000000]/5 shadow-sm">
+              <div className="absolute flex items-center justify-center text-[#ffffff] group-hover:text-primary group-hover:translate-x-8 group-hover:-translate-y-8 transition-all duration-500">
                 {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </div>
-              <div className="absolute flex items-center justify-center text-[#05090f] -translate-x-8 translate-y-8 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-500">
+              <div className="absolute flex items-center justify-center text-[#ffffff] group-hover:text-primary -translate-x-8 translate-y-8 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-500">
                 {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </div>
             </div>
 
-            <div className="absolute inset-0 bg-primary transform translate-y-full rounded-[50%] group-hover:translate-y-0 group-hover:rounded-none transition-all duration-700 ease-[cubic-bezier(0.83,0,0.17,1)] z-0" />
+            <div className="absolute inset-0 bg-primary scale-y-0 origin-bottom transition-transform duration-700 ease-[cubic-bezier(0.83,0,0.17,1)] group-hover:scale-y-100 z-0" />
           </button>
           
         </div>
@@ -94,7 +100,7 @@ export function Header() {
       {/* Fullscreen Brutalist Menu */}
       <div 
         ref={menuRef}
-        className="fixed left-0 top-[-100vh] w-full h-screen bg-[#0a0a0a] z-[90] flex flex-col justify-between px-6 md:px-12 pt-32 pb-12 overflow-hidden"
+        className="fixed left-0 top-[-100vh] w-full h-screen bg-[#000000] z-[90] flex flex-col justify-between px-6 md:px-12 pt-32 pb-12 overflow-hidden"
       >
         <div className="flex-1 flex flex-col justify-center">
           
@@ -106,12 +112,12 @@ export function Header() {
                   <a 
                     href={link.href}
                     onClick={() => setIsMenuOpen(false)}
-                    className="menu-item flex items-baseline gap-4 md:gap-8 group text-[#e8e8e5] hover:pl-8 transition-all duration-500 w-max"
+                    className="menu-item flex items-baseline gap-4 md:gap-8 group text-[#ffffff] hover:pl-8 transition-all duration-500 w-max"
                   >
-                    <span className="font-mono text-xs md:text-sm text-white/30 mb-2 md:mb-6">
+                    <span className="font-mono text-xs md:text-sm text-[#ffffff]/30 mb-2 md:mb-6">
                       {link.num}
                     </span>
-                    <span className="text-[12vw] md:text-[7vw] font-black uppercase tracking-tighter leading-[0.85] group-hover:italic group-hover:text-white transition-colors">
+                    <span className="text-[12vw] md:text-[7vw] font-black uppercase tracking-tighter leading-[0.85] group-hover:italic group-hover:text-[#ffffff] transition-colors">
                       {link.name}
                     </span>
                   </a>
@@ -121,7 +127,7 @@ export function Header() {
 
             {/* Video Derecha (Awwwards Style) */}
             <div className="hidden lg:flex w-1/2 h-[50vh] xl:h-[60vh] justify-end items-center pr-8">
-              <div className="menu-video w-full max-w-2xl h-full relative overflow-hidden bg-white/5 opacity-0">
+              <div className="menu-video w-full max-w-2xl h-full relative overflow-hidden bg-[#ffffff]/5 opacity-0">
                 <video 
                   src="/hero.mp4" 
                   autoPlay 
@@ -131,7 +137,7 @@ export function Header() {
                   className="w-full h-full object-cover scale-105" 
                 />
                 {/* Dark overlay sobre el video para no competir con el texto */}
-                <div className="absolute inset-0 bg-black/30 mix-blend-overlay"></div>
+                <div className="absolute inset-0 bg-[#000000]/30 mix-blend-overlay"></div>
               </div>
             </div>
           </div>
@@ -139,17 +145,17 @@ export function Header() {
         </div>
 
         {/* Menu Footer Reducido */}
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-start md:items-end w-full gap-8">
+        <div className="border-t border-[#ffffff]/10 pt-8 flex flex-col md:flex-row justify-between items-start md:items-end w-full gap-8">
           <div className="overflow-hidden pb-2">
-            <a href="mailto:fjm@fjmtransportes.com" className="menu-item text-[#e8e8e5] text-2xl md:text-3xl font-light hover:italic transition-all">
+            <a href="mailto:fjm@fjmtransportes.com" className="menu-item text-[#ffffff] text-2xl md:text-3xl font-light hover:italic transition-all">
               fjm@fjmtransportes.com
             </a>
           </div>
           <div className="overflow-hidden text-right">
-            <span className="menu-item font-mono text-[10px] text-white/40 tracking-widest uppercase block mb-2">Socials</span>
-            <div className="menu-item flex gap-6 text-[#e8e8e5] font-mono text-xs tracking-widest uppercase">
-              <a href="#" className="hover:text-white hover:underline underline-offset-4">Instagram</a>
-              <a href="#" className="hover:text-white hover:underline underline-offset-4">LinkedIn</a>
+            <span className="menu-item font-mono text-[10px] text-[#ffffff]/40 tracking-widest uppercase block mb-2">Socials</span>
+            <div className="menu-item flex gap-6 text-[#ffffff] font-mono text-xs tracking-widest uppercase">
+              <a href="#" className="hover:text-[#ffffff]/60 hover:underline underline-offset-4">Instagram</a>
+              <a href="#" className="hover:text-[#ffffff]/60 hover:underline underline-offset-4">LinkedIn</a>
             </div>
           </div>
         </div>

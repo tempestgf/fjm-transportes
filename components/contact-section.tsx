@@ -105,12 +105,12 @@ export function ContactSection() {
     <section 
       ref={sectionRef} 
       id="contacte" 
-      className="relative z-40 w-full bg-[#05090f] text-[#e8e8e5] pt-32 pb-0 -mt-24 rounded-t-[2.5rem] lg:rounded-t-[4rem] shadow-[0_-30px_60px_rgba(0,0,0,0.8)] overflow-hidden flex flex-col"
+      className="relative z-40 w-full bg-[#ffffff] text-[#000000] pt-32 pb-0 -mt-24 rounded-t-[2.5rem] lg:rounded-t-[4rem] shadow-[0_-30px_60px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex-1 flex flex-col pt-10">
         
         {/* Superior: Título Masivo */}
-        <div className="contact-title-container flex flex-col lg:flex-row items-start lg:items-end justify-between border-b border-white/10 pb-16 lg:pb-24 gap-12">
+        <div className="contact-title-container flex flex-col lg:flex-row items-start lg:items-end justify-between border-b border-[#000000]/10 pb-16 lg:pb-24 gap-12">
           
           <div className="flex flex-col">
             <h2 className="text-[6rem] sm:text-[8rem] lg:text-[12rem] leading-[0.85] font-black uppercase tracking-tighter flex overflow-hidden pb-4 lg:pb-8 pt-2">
@@ -124,8 +124,8 @@ export function ContactSection() {
           </div>
 
           <div className="lg:w-1/3 flex flex-col gap-6 lg:pb-4">
-            <p className="text-xl lg:text-2xl font-light text-white/60 leading-relaxed">
-              Té un projecte complex? Necessita pressupost? <span className="text-white font-medium">L'ajudem a moure'l.</span>
+            <p className="text-xl lg:text-2xl font-light text-[#000000]/60 leading-relaxed">
+              Té un projecte complex? Necessita pressupost? <span className="text-[#000000] font-medium">L'ajudem a moure'l.</span>
             </p>
           </div>
         </div>
@@ -134,35 +134,35 @@ export function ContactSection() {
         <div className="flex flex-col lg:flex-row w-full flex-1">
           
           {/* Lado Izquierdo: Datos de contacto estilizados */}
-          <div className="info-wrapper lg:w-1/3 border-b lg:border-b-0 lg:border-r border-white/10 py-16 lg:py-24 lg:pr-16 flex flex-col gap-10">
+          <div className="info-wrapper lg:w-1/3 border-b lg:border-b-0 lg:border-r border-[#000000]/10 py-16 lg:py-24 lg:pr-16 flex flex-col gap-10">
             
             <div className="anim-info-block group">
-              <h4 className="font-mono text-xs uppercase tracking-[0.3em] text-white/40 mb-4">Email (Comercial)</h4>
+              <h4 className="font-mono text-xs uppercase tracking-[0.3em] text-[#000000]/40 mb-4">Email (Comercial)</h4>
               <a href="mailto:fjm@fjmtransportes.com" className="text-2xl lg:text-3xl font-light tracking-tight hover:text-primary transition-colors duration-500 hover:break-all overflow-hidden break-all">
                 fjm@fjmtransportes.com
               </a>
             </div>
 
             <div className="anim-info-block group">
-              <h4 className="font-mono text-xs uppercase tracking-[0.3em] text-white/40 mb-4">Telèfons Principals</h4>
+              <h4 className="font-mono text-xs uppercase tracking-[0.3em] text-[#000000]/40 mb-4">Telèfons Principals</h4>
               <div className="flex flex-col gap-2">
                 <a href="tel:+34937775332" className="text-2xl lg:text-3xl font-light tracking-tight hover:text-primary transition-colors duration-500">
-                  <span className="text-white/40 text-lg mr-2 font-mono">Oficina:</span>937 77 53 32
+                  <span className="text-[#000000]/40 text-lg mr-2 font-mono">Oficina:</span>937 77 53 32
                 </a>
                 <a href="tel:+34687942642" className="text-2xl lg:text-3xl font-light tracking-tight hover:text-primary transition-colors duration-500">
-                  <span className="text-white/40 text-lg mr-2 font-mono">Trànsit:</span>+34 687 94 26 42
+                  <span className="text-[#000000]/40 text-lg mr-2 font-mono">Trànsit:</span>+34 687 94 26 42
                 </a>
               </div>
             </div>
 
-            <div className="anim-info-block group mt-6 border-t border-white/10 pt-8">
-              <h4 className="font-mono text-xs uppercase tracking-[0.3em] text-white/40 mb-4">Seu i Magatzem</h4>
-              <p className="text-xl lg:text-2xl font-light tracking-tight text-white/80 leading-relaxed mb-4">
+            <div className="anim-info-block group mt-6 border-t border-[#000000]/10 pt-8">
+              <h4 className="font-mono text-xs uppercase tracking-[0.3em] text-[#000000]/40 mb-4">Seu i Magatzem</h4>
+              <p className="text-xl lg:text-2xl font-light tracking-tight text-[#000000]/80 leading-relaxed mb-4">
                 Carrer Tres Rieres, Nave 20<br/>
                 Polígon Industrial La Magarola<br/>
                 08292 Esparreguera, Barcelona
               </p>
-              <p className="text-sm font-light text-white/40">
+              <p className="text-sm font-light text-[#000000]/40">
                 1.100 m2 per a transport i emmagatzematge de mercaderies.
               </p>
             </div>
@@ -175,59 +175,59 @@ export function ContactSection() {
               
               <div className="flex flex-col gap-8 lg:gap-12">
                 {/* Fila 1 */}
-                <div className="anim-form-row relative group flex flex-col md:flex-row md:items-end gap-4 border-b border-white/20 pb-4">
+                <div className="anim-form-row relative group flex flex-col md:flex-row md:items-end gap-4 border-b border-[#000000]/20 pb-4">
                   <span className="font-mono text-sm text-primary mb-2 md:mb-0 md:mr-6 shrink-0">01</span>
                   <input 
                     type="text" 
                     required
                     placeholder="Com es diu? *" 
-                    className="w-full bg-transparent text-3xl lg:text-5xl font-light text-white placeholder:text-white/20 focus:outline-none focus:placeholder:text-transparent peer" 
+                    className="w-full bg-transparent text-3xl lg:text-5xl font-light text-[#000000] placeholder:text-[#000000]/20 focus:outline-none focus:placeholder:text-transparent peer" 
                   />
                   <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-primary transition-all duration-700 ease-[cubic-bezier(0.83,0,0.17,1)] peer-focus:w-full" />
                 </div>
 
                 {/* Fila 2 */}
-                <div className="anim-form-row relative group flex flex-col md:flex-row md:items-end gap-4 border-b border-white/20 pb-4">
+                <div className="anim-form-row relative group flex flex-col md:flex-row md:items-end gap-4 border-b border-[#000000]/20 pb-4">
                   <span className="font-mono text-sm text-primary mb-2 md:mb-0 md:mr-6 shrink-0">02</span>
                   <input 
                     type="email" 
                     required
                     placeholder="Quin és el seu email? *" 
-                    className="w-full bg-transparent text-3xl lg:text-5xl font-light text-white placeholder:text-white/20 focus:outline-none focus:placeholder:text-transparent peer" 
+                    className="w-full bg-transparent text-3xl lg:text-5xl font-light text-[#000000] placeholder:text-[#000000]/20 focus:outline-none focus:placeholder:text-transparent peer" 
                   />
                   <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-primary transition-all duration-700 ease-[cubic-bezier(0.83,0,0.17,1)] peer-focus:w-full" />
                 </div>
 
                 {/* Fila 3 y 4 (Empresa / Telef) */}
                 <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
-                  <div className="anim-form-row relative group flex-1 flex flex-col md:flex-row md:items-end gap-4 border-b border-white/20 pb-4">
+                  <div className="anim-form-row relative group flex-1 flex flex-col md:flex-row md:items-end gap-4 border-b border-[#000000]/20 pb-4">
                     <span className="font-mono text-sm text-primary mb-2 md:mb-0 md:mr-4 shrink-0">03</span>
                     <input 
                       type="text" 
                       placeholder="Empresa (Opcional)" 
-                      className="w-full bg-transparent text-2xl lg:text-4xl font-light text-white placeholder:text-white/20 focus:outline-none focus:placeholder:text-transparent peer" 
+                      className="w-full bg-transparent text-2xl lg:text-4xl font-light text-[#000000] placeholder:text-[#000000]/20 focus:outline-none focus:placeholder:text-transparent peer" 
                     />
                     <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-primary transition-all duration-700 ease-out peer-focus:w-full" />
                   </div>
                   
-                  <div className="anim-form-row relative group flex-1 flex flex-col md:flex-row md:items-end gap-4 border-b border-white/20 pb-4">
+                  <div className="anim-form-row relative group flex-1 flex flex-col md:flex-row md:items-end gap-4 border-b border-[#000000]/20 pb-4">
                     <span className="font-mono text-sm text-primary mb-2 md:mb-0 md:mr-4 shrink-0">04</span>
                     <input 
                       type="tel" 
                       placeholder="Telèfon de contacte" 
-                      className="w-full bg-transparent text-2xl lg:text-4xl font-light text-white placeholder:text-white/20 focus:outline-none focus:placeholder:text-transparent peer" 
+                      className="w-full bg-transparent text-2xl lg:text-4xl font-light text-[#000000] placeholder:text-[#000000]/20 focus:outline-none focus:placeholder:text-transparent peer" 
                     />
                     <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-primary transition-all duration-700 ease-out peer-focus:w-full" />
                   </div>
                 </div>
 
                 {/* Fila 5 Mensaje */}
-                <div className="anim-form-row relative group flex flex-col md:flex-row gap-4 border-b border-white/20 pb-4 mt-4">
+                <div className="anim-form-row relative group flex flex-col md:flex-row gap-4 border-b border-[#000000]/20 pb-4 mt-4">
                   <span className="font-mono text-sm text-primary md:mr-6 shrink-0 pt-2">05</span>
                   <textarea 
                     required
                     placeholder="Expliqui'ns les seves necessitats de transport..." 
-                    className="w-full bg-transparent text-2xl lg:text-4xl font-light text-white placeholder:text-white/20 focus:outline-none focus:placeholder:text-transparent peer resize-none min-h-[120px]" 
+                    className="w-full bg-transparent text-2xl lg:text-4xl font-light text-[#000000] placeholder:text-[#000000]/20 focus:outline-none focus:placeholder:text-transparent peer resize-none min-h-[120px]" 
                   />
                   <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-primary transition-all duration-700 ease-[cubic-bezier(0.83,0,0.17,1)] peer-focus:w-full" />
                 </div>
@@ -237,19 +237,18 @@ export function ContactSection() {
               <div className="anim-form-row mt-12 mb-8">
                 <button 
                   type="submit" 
-                  className="group relative w-full h-24 lg:h-32 bg-[#e8e8e5] text-[#05090f] overflow-hidden rounded-[2rem] flex items-center justify-between px-8 lg:px-16"
+                  className="anti-alias-btn group relative isolate w-full h-24 lg:h-32 bg-[#ffffff] text-[#000000] overflow-hidden rounded-[2rem] flex items-center justify-between px-8 lg:px-16 transition-colors duration-500 border border-[#000000]/10 shadow-lg"
                 >
-                  <span className="relative z-10 text-3xl lg:text-5xl font-black uppercase tracking-tighter group-hover:text-white transition-colors duration-500">
+                  <span className="relative z-10 text-3xl lg:text-5xl font-black uppercase tracking-tighter group-hover:text-[#ffffff] transition-colors duration-500">
                     Enviar Petició
                   </span>
                   
-                  <div className="relative z-10 w-16 h-16 rounded-full bg-[#05090f] flex items-center justify-center overflow-hidden group-hover:bg-white transition-colors duration-500">
-                    <ArrowRight className="w-8 h-8 text-[#e8e8e5] absolute group-hover:translate-x-12 transition-transform duration-500" />
-                    <ArrowRight className="w-8 h-8 text-[#05090f] absolute -translate-x-12 group-hover:translate-x-0 transition-transform duration-500" />
+                  <div className="relative z-10 w-16 h-16 md:w-20 md:h-20 rounded-full bg-primary group-hover:bg-[#ffffff] flex items-center justify-center overflow-hidden transition-colors duration-500 border border-[#000000]/5 shadow-sm shrink-0">
+                    <ArrowRight className="w-8 h-8 text-[#ffffff] absolute group-hover:translate-x-12 group-hover:text-primary transition-all duration-500" />
+                    <ArrowRight className="w-8 h-8 text-[#ffffff] absolute -translate-x-12 group-hover:translate-x-0 group-hover:text-primary transition-all duration-500" />
                   </div>
 
-                  {/* Fondo interactivo que llena el botón */}
-                  <div className="absolute inset-0 bg-primary transform translate-y-full rounded-[50%] group-hover:translate-y-0 group-hover:rounded-none transition-all duration-700 ease-[cubic-bezier(0.83,0,0.17,1)] z-0" />
+                  <div className="absolute inset-0 bg-primary scale-y-0 origin-bottom transition-transform duration-700 ease-[cubic-bezier(0.83,0,0.17,1)] group-hover:scale-y-100 z-0" />
                 </button>
               </div>
 

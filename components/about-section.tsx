@@ -114,7 +114,7 @@ export function AboutSection() {
     <section 
       ref={sectionRef} 
       id="sobre-nosaltres" 
-      className="relative z-30 w-full overflow-hidden bg-[#e8e8e5] text-[#05090f] -mt-24 pt-32 pb-0 shadow-[0_-30px_60px_rgba(0,0,0,0.5)]"
+      className="relative z-30 w-full overflow-hidden bg-[#ffffff] text-[#000000] -mt-24 pt-32 pb-0 shadow-[0_-30px_60px_rgba(0,0,0,0.5)]"
     >
       <div className="container relative mx-auto px-4 sm:px-6 lg:px-8 z-10">
         
@@ -124,15 +124,15 @@ export function AboutSection() {
           {/* Columna Izquierda: Los 15 Años */}
           <div className="lg:w-1/3 flex flex-col justify-start">
             <div className="reveal-text lg:sticky lg:top-32">
-              <div className="inline-flex items-center px-4 py-2 rounded-full border border-black/10 text-[#05090f] font-mono tracking-widest text-[10px] uppercase mb-12 bg-white/50 backdrop-blur-md">
+              <div className="inline-flex items-center px-4 py-2 rounded-full border border-[#000000]/10 text-[#000000] font-mono tracking-widest text-[10px] uppercase mb-12 bg-[#ffffff]/50 backdrop-blur-md">
                  <span className="w-2 h-2 rounded-full bg-primary mr-3"></span>
                  Sobre Nosaltres
               </div>
               
-              <div className="text-[8rem] lg:text-[11rem] text-[#05090f] font-black tracking-tighter leading-none mb-4 flex items-start">
+              <div className="text-[8rem] lg:text-[11rem] text-[#000000] font-black tracking-tighter leading-none mb-4 flex items-start">
                 15<span className="text-primary text-6xl mt-4">+</span>
               </div>
-              <div className="font-mono text-xs uppercase tracking-[0.25em] text-[#05090f]/60 max-w-[200px] leading-relaxed">
+              <div className="font-mono text-xs uppercase tracking-[0.25em] text-[#000000]/60 max-w-[200px] leading-relaxed">
                 Anys d'experiència movint el que els altres no poden
               </div>
             </div>
@@ -140,17 +140,17 @@ export function AboutSection() {
           
           {/* Columna Derecha: Título y Párrafos (Brutalista) */}
           <div className="lg:w-2/3 pt-4 lg:pt-16">
-            <h2 className="text-5xl sm:text-7xl lg:text-[6.5rem] font-black uppercase tracking-tighter leading-[0.85] mb-16 text-[#05090f]">
+            <h2 className="text-5xl sm:text-7xl lg:text-[6.5rem] font-black uppercase tracking-tighter leading-[0.85] mb-16 text-[#000000]">
               <span className="reveal-text block">Líders en</span>
               <span className="reveal-text block italic font-serif text-primary lowercase tracking-normal">especials</span>
               <span className="reveal-text block">i urgents</span>
             </h2>
 
-            <div className="w-full h-px bg-black/10 mb-16" />
+            <div className="w-full h-px bg-[#000000]/10 mb-16" />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-lg lg:text-xl font-light text-[#05090f]/80 leading-relaxed">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-lg lg:text-xl font-light text-[#000000]/80 leading-relaxed">
               <p className="reveal-text">
-                <strong className="font-bold text-[#05090f]">FJM Transportes</strong> és una empresa de transports especialitzada en transports convencionals i serveis urgents. Amb seu a <strong className="text-primary font-bold">Esparreguera (Barcelona)</strong>, oferim serveis d'abast nacional i internacional garantint màxima confiança.
+                <strong className="font-bold text-[#000000]">FJM Transportes</strong> és una empresa de transports especialitzada en transports convencionals i serveis urgents. Amb seu a <strong className="text-primary font-bold">Esparreguera (Barcelona)</strong>, oferim serveis d'abast nacional i internacional garantint màxima confiança.
               </p>
               <div className="flex flex-col gap-8">
                 <p className="reveal-text">
@@ -168,40 +168,25 @@ export function AboutSection() {
       {/* Inferior: Expanding Image Scrub + Rotative SVG Badge */}
       <div className="w-full flex relative justify-center items-end" style={{ height: "auto" }}>
         
-        {/* Floating Badge (Posicionado entre el texto y la imagen) */}
-        <div className="spin-badge-container absolute z-20 hidden md:flex bottom-[65%] right-16 w-40 h-40">
-          <div className="w-full h-full relative flex items-center justify-center bg-white/80 backdrop-blur-xl rounded-full shadow-2xl border border-black/5">
-            <svg viewBox="0 0 100 100" className="spin-badge w-full h-full p-2">
-              <path id="circlePathAbout" d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" fill="none" />
-              <text className="text-[10px] font-mono uppercase tracking-[0.22em] fill-[#05090f] font-bold">
-                <textPath href="#circlePathAbout">
-                  • FJM Transportes • Experiencia y Seguridad
-                </textPath>
-              </text>
-            </svg>
-            <div className="absolute w-3 h-3 bg-primary rounded-full" />
-          </div>
-        </div>
-
         {/* Imagen en expansión controlada por el scroll */}
         <div 
           ref={imgWrapperRef} 
           className="relative w-[90%] md:w-[70%] h-[50vh] md:h-[80vh] rounded-t-[3rem] overflow-hidden" // Solo redondeado superior
         >
-          <div className="absolute inset-0 bg-black/10 z-10 mix-blend-multiply pointer-events-none" />
+          <div className="absolute inset-0 bg-[#000000]/10 z-10 mix-blend-multiply pointer-events-none" />
           {/* Overlay oscuro sutil para no deslumbrar en el contraste general */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10 pointer-events-none" />
           
           <img 
             ref={imgRef}
-            src="/fleet/especials.avif" // Imagen local requerida
+            src="/media/fleet-truck-30.jpeg"
             alt="Transports Especials i Maquinària Pesada" 
             className="absolute inset-0 w-full h-[130%] object-cover origin-center"
           />
           
           {/* Título gigante superpuesto que respeta el interior del recorte */}
           <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none overflow-hidden">
-             <h3 className="reveal-text text-white text-[12vw] md:text-[9vw] font-black uppercase tracking-tighter opacity-80" style={{ mixBlendMode: 'overlay' }}>
+             <h3 className="reveal-text text-[#ffffff] text-[12vw] md:text-[9vw] font-black uppercase tracking-tighter opacity-80" style={{ mixBlendMode: 'overlay' }}>
                Expansió
              </h3>
           </div>

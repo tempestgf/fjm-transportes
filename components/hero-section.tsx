@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useEffect, useRef } from "react"
 import gsap from "gsap"
@@ -17,6 +17,7 @@ export function HeroSection() {
   const text2Ref = useRef<HTMLHeadingElement>(null)
   const text3Ref = useRef<HTMLHeadingElement>(null)
   const descRef = useRef<HTMLDivElement>(null)
+  const logoRef = useRef<HTMLImageElement>(null)
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -69,47 +70,63 @@ export function HeroSection() {
         stagger: 0.1,
         ease: "power2.inOut"
       }, 0)
+
+      tl.fromTo(logoRef.current,
+        { opacity: 0, scale: 0.9 },
+        { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" },
+        0.4
+      )
     }, containerRef)
 
     return () => ctx.revert()
   }, [])
 
   return (
-    <section ref={containerRef} className="relative w-full h-screen bg-[#0a0a0a] flex flex-col items-center justify-center overflow-hidden">
+    <section ref={containerRef} className="relative w-full h-screen bg-[#000000] flex flex-col items-center justify-center overflow-hidden">
       
       {/* Editoriales verticales */}
       <div className="hidden md:flex absolute top-1/2 left-8 -translate-y-1/2 z-20 mix-blend-difference rotate-180" style={{ writingMode: 'vertical-rl' }}>
-        <p className="text-[#e8e8e5] text-[10px] uppercase tracking-[0.4em] font-mono whitespace-nowrap">
+        <p className="text-[#ffffff] text-[10px] uppercase tracking-[0.4em] font-mono whitespace-nowrap">
           Des de 2009 — Collbató, BCN
         </p>
       </div>
 
       <div className="hidden md:flex absolute top-1/2 right-8 -translate-y-1/2 z-20 mix-blend-difference" style={{ writingMode: 'vertical-rl' }}>
-        <p className="text-[#e8e8e5] text-[10px] uppercase tracking-[0.4em] font-mono whitespace-nowrap">
+        <p className="text-[#ffffff] text-[10px] uppercase tracking-[0.4em] font-mono whitespace-nowrap">
           Servei Nacional i Internacional
         </p>
       </div>
 
       <div className="relative z-10 w-full flex flex-col items-center justify-center pointer-events-none mix-blend-difference">
-        <h1 ref={text1Ref} className="text-[#e8e8e5] text-[15vw] leading-[0.8] font-black uppercase tracking-tighter text-center m-0">
+        <h1 ref={text1Ref} className="text-[#ffffff] text-[15vw] leading-[0.8] font-black uppercase tracking-tighter text-center m-0">
           Transport
         </h1>
         
         <div className="flex items-center justify-center gap-4 lg:gap-8 w-full">
-          <h1 ref={text2Ref} className="text-[#e8e8e5] text-[15vw] leading-[0.8] font-black uppercase tracking-tighter m-0 italic font-serif">
+          <h1 ref={text2Ref} className="text-[#ffffff] text-[15vw] leading-[0.8] font-black uppercase tracking-tighter m-0 italic font-serif">
             &
           </h1>
-          <h1 ref={text3Ref} className="text-[#e8e8e5] text-[15vw] leading-[0.8] font-black uppercase tracking-tighter m-0" style={{ WebkitTextStroke: "2px #e8e8e5", color: "transparent" }}>
+          <h1 ref={text3Ref} className="text-[#ffffff] text-[15vw] leading-[0.8] font-black uppercase tracking-tighter m-0" style={{ WebkitTextStroke: "2px #ffffff", color: "transparent" }}>
             Logística
           </h1>
         </div>
+      </div>
+
+      {/* Logo Central (Aparece tras el texto) */}
+      <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
+        <img 
+          ref={logoRef} 
+          src="/FJM_LOGO.png" 
+          alt="FJM Logo" 
+          className="w-48 md:w-80 object-contain opacity-0"
+        />
       </div>
 
       {/* Video Central */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 flex justify-center items-center">
         <div 
           ref={imageRef}
-          className="overflow-hidden relative bg-[#05090f] flex justify-center items-center"
+          className="overflow-hidden relative bg-[#ffffff] flex justify-center items-center"
           style={{ width: "30vw", height: "40vh", borderRadius: "24px" }}
         >
           <video 
@@ -120,30 +137,30 @@ export function HeroSection() {
             playsInline
             className="w-[100vw] h-[100vh] object-cover scale-105 pointer-events-none max-w-none"
           />
-          <div className="absolute inset-0 bg-black/30 mix-blend-overlay" />
+          <div className="absolute inset-0 bg-[#000000]/30 mix-blend-overlay" />
         </div>
       </div>
 
       <div ref={descRef} className="absolute bottom-12 z-20 w-full px-8 flex justify-between items-end mix-blend-difference opacity-0">
-        <p className="max-w-md text-[#e8e8e5] text-sm md:text-base font-medium uppercase font-mono tracking-wide leading-relaxed">
+        <p className="max-w-md text-[#ffffff] text-sm md:text-base font-medium uppercase font-mono tracking-wide leading-relaxed">
           Som una empresa versàtil en constant evolució i desenvolupament, 
           oferint solucions especialitzades en transports convencionals i serveis urgents.
         </p>
 
         <Link 
           href="#contacte" 
-          className="group relative h-14 md:h-16 bg-[#e8e8e5] text-[#05090f] overflow-hidden rounded-full flex items-center justify-between px-6 gap-6 md:px-8 md:gap-8"
+          className="group relative isolate h-14 md:h-16 bg-[#ffffff] text-[#000000] overflow-hidden rounded-full flex items-center justify-between px-6 gap-6 md:px-8 md:gap-8 border border-[#000000]/10 shadow-sm"
         >
-          <span className="relative z-10 text-sm md:text-xl font-black uppercase tracking-tighter group-hover:text-white transition-colors duration-500">
+          <span className="relative z-10 text-sm md:text-xl font-black uppercase tracking-tighter group-hover:text-[#ffffff] transition-colors duration-500">
             Pressupost
           </span>
           
-          <div className="relative z-10 w-10 h-10 rounded-full bg-[#05090f] flex items-center justify-center overflow-hidden group-hover:bg-white transition-colors duration-500 shrink-0">
-            <ArrowUpRight className="w-5 h-5 text-[#e8e8e5] absolute group-hover:translate-x-8 group-hover:-translate-y-8 transition-transform duration-500" />
-            <ArrowUpRight className="w-5 h-5 text-[#05090f] absolute -translate-x-8 translate-y-8 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-500" />
+          <div className="relative z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary group-hover:bg-[#ffffff] flex items-center justify-center overflow-hidden transition-colors duration-500 shrink-0 border border-[#000000]/5 shadow-sm">
+            <ArrowUpRight className="w-5 h-5 text-[#ffffff] group-hover:text-primary absolute group-hover:translate-x-8 group-hover:-translate-y-8 transition-all duration-500" />
+            <ArrowUpRight className="w-5 h-5 text-[#ffffff] group-hover:text-primary absolute -translate-x-8 translate-y-8 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-500" />
           </div>
 
-          <div className="absolute inset-0 bg-primary transform translate-y-full rounded-[50%] group-hover:translate-y-0 group-hover:rounded-none transition-all duration-700 ease-[cubic-bezier(0.83,0,0.17,1)] z-0" />
+          <div className="absolute inset-0 rounded-[inherit] bg-primary scale-y-0 origin-bottom transition-transform duration-700 ease-[cubic-bezier(0.83,0,0.17,1)] group-hover:scale-y-100 z-0" />
         </Link>
       </div>
 

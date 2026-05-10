@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animación Logística Profesional</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000; /* Fondo negro */
+            overflow: hidden;
+        }
+
+        /* Contenedor principal que mantiene todo unido */
+        .escena {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Forzamos a la imagen a ser un círculo perfecto */
+        .mundo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%; /* Recorta el recuadro negro sobrante */
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            box-shadow: 0 0 30px rgba(135, 206, 250, 0.15); /* Brillo sutil */
+        }
+
+        /* El SVG que contiene la ruta, superpuesto exactamente sobre la imagen */
+        .ruta-contenedor {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* El camión */
+        .camion {
+            position: absolute;
+            width: 45px; /* Tamaño decente y visible */
+            height: 45px;
+            z-index: 3;
+            /* Lo ocultamos hasta que GSAP lo ubique en la ruta */
+            visibility: hidden; 
+        }
+
+        .camion svg {
+            width: 100%;
+            height: 100%;
+            fill: #ffffff;
+            filter: drop-shadow(0px 8px 10px rgba(0,0,0,0.8)); /* Sombra fuerte para separarlo del fondo */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="escena">
+        <img src="logo.png" alt="Mundo" class="mundo-img">
+
+        <svg class="ruta-contenedor" viewBox="0 0 300 300">
+            <path id="arco-vuelo" d="M -50 200 Q 150 -50 350 200" fill="none" stroke="transparent" stroke-width="2"/>
+        </svg>
+
+        <div class="camion" id="vehiculo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M22.92,10.6l-2-3A2,2,0,0,0,19.25,7H17V5a2,2,0,0,0-2-2H4A2,2,0,0,0,2,5V16a2,2,0,0,0,2,2H5.08a3,3,0,1,0,5.84,0h5.16a3,3,0,1,0,5.84,0H23V12A2,2,0,0,0,22.92,10.6ZM8,19a1,1,0,1,1,1-1A1,1,0,0,1,8,19Zm4-3H4V5h11v8.34a3,3,0,0,0-3,2.66Zm6,3a1,1,0,1,1,1-1A1,1,0,0,1,18,19Zm3-4a1,1,0,0,1-1,1H16V9h3.25l1.6,2.4A1,1,0,0,1,21,12v3Z"/>
+            </svg>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MotionPathPlugin.min.js"></script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            gsap.registerPlugin(MotionPathPlugin);
+
+            // 1. Mostrar el camión y anclarlo a la ruta
+            gsap.set("#vehiculo", { visibility: "visible" });
+
+            // 2. Movimiento a lo largo del arco
+            gsap.to("#vehiculo", {
+                duration: 5,          // Tarda 5 segundos en cruzar
+                repeat: -1,           // Bucle infinito
+                ease: "power1.inOut", // Arranca suave, acelera y frena suave
+                motionPath: {
+                    path: "#arco-vuelo",
+                    align: "#arco-vuelo",
+                    alignOrigin: [0.5, 0.5],
+                    autoRotate: true  // El morro del camión sigue la curva
+                }
+            });
+
+            // 3. Efecto 3D de Cercanía (El camión crece al estar en la cima del mundo)
+            gsap.to("#vehiculo", {
+                scale: 1.4,           // Crece un 40% en el centro
+                duration: 2.5,        // La mitad del tiempo total (5s)
+                yoyo: true,           // Crece y luego se encoge
+                repeat: -1,
+                ease: "sine.inOut"
+            });
+        });
+    </script>
+</body>
+</html>

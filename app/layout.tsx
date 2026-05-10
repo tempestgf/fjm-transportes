@@ -4,6 +4,8 @@ import { Inter, Poppins } from "next/font/google"
 import { Suspense } from "react"
 import "./globals.css"
 
+const faviconHref = new URL("./FJM_LOGO.ico", import.meta.url).href
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -22,7 +24,10 @@ export const metadata: Metadata = {
   description:
     "Empresa especialitzada en transports convencionals i serveis urgents amb més de 15 anys d'experiència. Flota completa de furgonetes a camions de 38m.",
   keywords: "transport, camions, furgonetes, Catalunya, Barcelona, logística, transport urgent",
-    generator: 'v0.app'
+    generator: 'v0.app',
+  icons: {
+    icon: faviconHref,
+  },
 }
 
 import { SmoothScrolling } from "@/components/smooth-scrolling"
@@ -34,7 +39,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ca" className={`${inter.variable} ${poppins.variable}`}>
-      <body className="font-sans antialiased bg-gray-50">
+      <body className="font-sans antialiased bg-background text-foreground">
         <SmoothScrolling>
           <Suspense fallback={null}>{children}</Suspense>
         </SmoothScrolling>
