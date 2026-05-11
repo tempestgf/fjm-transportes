@@ -263,13 +263,13 @@ export function VehiclesSection() {
         <div className="absolute inset-0 opacity-5 z-0" style={{ backgroundImage: "radial-gradient(#000000 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
         
         <div className="massive-footer-gallery flex gap-4 md:gap-8 whitespace-nowrap px-8 md:px-12 z-10 w-max pointer-events-auto cursor-ew-resize">
-          {[1, 2, 3, 4, 5, 6].map((_, i) => (
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((_, i) => (
              <div key={i} className="w-[60vw] md:w-[35vw] lg:w-[25vw] h-[25vh] md:h-[35vh] rounded-[2rem] overflow-hidden flex-shrink-0 relative group shadow-lg">
                <div className="absolute inset-0 bg-[#000000]/20 mix-blend-overlay z-10 transition-opacity duration-700 group-hover:opacity-0" />
-               <img 
-                 src={i % 2 === 0 ? "/media/fleet-truck-30.jpeg" : "/media/fleet-truck-05.jpeg"} 
+               <img
+                 src={i % 3 === 0 ? "/media/fleet-truck-30.jpeg" : i % 3 === 1 ? "/media/fleet-truck-05.jpeg" : "/media/fleet-truck-01.jpeg"}
                  alt={`Vehículo de flota ${i + 1}`}
-                 className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-1000 ease-[cubic-bezier(0.83,0,0.17,1)] grayscale group-hover:grayscale-0"
+                 className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-1000 ease-[cubic-bezier(0.83,0,0.17,1)]"
                />
              </div>
           ))}

@@ -15,12 +15,12 @@ export function AboutSection() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      
+
       // 1. Efecto Overlap de entrada (esquinas se ajustan)
       gsap.fromTo(sectionRef.current,
-        { 
-          y: 150, 
-          borderTopLeftRadius: "150px", 
+        {
+          y: 150,
+          borderTopLeftRadius: "150px",
           borderTopRightRadius: "150px",
         },
         {
@@ -66,10 +66,10 @@ export function AboutSection() {
         })
 
         // Parallax interior en la imagen que se expande
-        gsap.fromTo(imgRef.current, 
-          { y: "-15%", scale: 1.15 },
-          { 
-            y: "15%", 
+        gsap.fromTo(imgRef.current,
+          { y: "-10%", scale: 1.1 },
+          {
+            y: "10%",
             scale: 1,
             ease: "none",
             scrollTrigger: {
@@ -111,24 +111,24 @@ export function AboutSection() {
   }, [])
 
   return (
-    <section 
-      ref={sectionRef} 
-      id="sobre-nosaltres" 
+    <section
+      ref={sectionRef}
+      id="sobre-nosaltres"
       className="relative z-30 w-full overflow-hidden bg-[#ffffff] text-[#000000] -mt-24 pt-32 pb-0 shadow-[0_-30px_60px_rgba(0,0,0,0.5)]"
     >
       <div className="container relative mx-auto px-4 sm:px-6 lg:px-8 z-10">
-        
+
         {/* Superior: Typography Grid */}
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 mb-24 relative z-10">
-          
+
           {/* Columna Izquierda: Los 15 Años */}
           <div className="lg:w-1/3 flex flex-col justify-start">
             <div className="reveal-text lg:sticky lg:top-32">
               <div className="inline-flex items-center px-4 py-2 rounded-full border border-[#000000]/10 text-[#000000] font-mono tracking-widest text-[10px] uppercase mb-12 bg-[#ffffff]/50 backdrop-blur-md">
-                 <span className="w-2 h-2 rounded-full bg-primary mr-3"></span>
-                 Sobre Nosaltres
+                <span className="w-2 h-2 rounded-full bg-primary mr-3"></span>
+                Sobre Nosaltres
               </div>
-              
+
               <div className="text-[8rem] lg:text-[11rem] text-[#000000] font-black tracking-tighter leading-none mb-4 flex items-start">
                 15<span className="text-primary text-6xl mt-4">+</span>
               </div>
@@ -137,7 +137,7 @@ export function AboutSection() {
               </div>
             </div>
           </div>
-          
+
           {/* Columna Derecha: Título y Párrafos (Brutalista) */}
           <div className="lg:w-2/3 pt-4 lg:pt-16">
             <h2 className="text-5xl sm:text-7xl lg:text-[6.5rem] font-black uppercase tracking-tighter leading-[0.85] mb-16 text-[#000000]">
@@ -167,28 +167,28 @@ export function AboutSection() {
 
       {/* Inferior: Expanding Image Scrub + Rotative SVG Badge */}
       <div className="w-full flex relative justify-center items-end" style={{ height: "auto" }}>
-        
+
         {/* Imagen en expansión controlada por el scroll */}
-        <div 
-          ref={imgWrapperRef} 
-          className="relative w-[90%] md:w-[70%] h-[50vh] md:h-[80vh] rounded-t-[3rem] overflow-hidden" // Solo redondeado superior
+        <div
+          ref={imgWrapperRef}
+          className="relative w-[90%] md:w-[80%] h-[60vh] md:h-[95vh] rounded-t-[3rem] overflow-hidden" // Solo redondeado superior
         >
           <div className="absolute inset-0 bg-[#000000]/10 z-10 mix-blend-multiply pointer-events-none" />
           {/* Overlay oscuro sutil para no deslumbrar en el contraste general */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10 pointer-events-none" />
-          
-          <img 
+
+          <img
             ref={imgRef}
-            src="/media/fleet-truck-30.jpeg"
-            alt="Transports Especials i Maquinària Pesada" 
-            className="absolute inset-0 w-full h-[130%] object-cover origin-center"
+            src="/media/fleet-truck-29.jpeg"
+            alt="Transports Especials i Maquinària Pesada"
+            className="absolute inset-0 w-full h-[120%] object-cover object-bottom"
           />
-          
+
           {/* Título gigante superpuesto que respeta el interior del recorte */}
           <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none overflow-hidden">
-             <h3 className="reveal-text text-[#ffffff] text-[12vw] md:text-[9vw] font-black uppercase tracking-tighter opacity-80" style={{ mixBlendMode: 'overlay' }}>
-               Expansió
-             </h3>
+            <h3 className="reveal-text text-[#ffffff] text-[12vw] md:text-[9vw] font-black uppercase tracking-tighter opacity-80" style={{ mixBlendMode: 'overlay' }}>
+              Expansió
+            </h3>
           </div>
         </div>
       </div>

@@ -54,7 +54,19 @@ export function Footer() {
 
   return (
     <footer ref={footerRef} className="relative z-30 w-full bg-[#000000] text-[#ffffff] pb-0 overflow-hidden flex flex-col">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col flex-1">
+      {/* Background image with layered overlays */}
+      <div className="absolute inset-0 pointer-events-none w-full h-full overflow-hidden select-none z-0">
+        <div className="absolute inset-0 bg-[#000000]/40 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#000000] via-transparent to-[#000000] z-10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#000000]/80 via-transparent to-[#000000]/80 z-10" />
+        <img
+          src="/media/fleet-truck-03.jpeg"
+          alt="Background"
+          className="w-full h-full object-cover opacity-50 grayscale"
+        />
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col flex-1 relative z-10">
         
         {/* Superior: Grid Editorial Info (like contact-section) */}
         <div className="flex flex-col lg:flex-row w-full pb-16 lg:pb-24 border-b border-[#ffffff]/10 gap-16 lg:gap-0">

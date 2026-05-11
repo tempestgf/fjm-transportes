@@ -125,10 +125,10 @@ export function InfrastructureSection() {
               {/* Imagen en el espacio vacío */}
               <div className="mt-16 w-full aspect-[4/5] rounded-[2rem] overflow-hidden relative group">
                 <div className="absolute inset-0 bg-[#000000]/10 mix-blend-overlay z-10 pointer-events-none transition-opacity duration-700 group-hover:opacity-0" />
-                <img 
-                  src="/media/fleet-truck-05.jpeg" 
+                <img
+                  src="/media/fleet-truck-05.jpeg"
                   alt="Instal·lacions FJM Transportes"
-                  className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-1000 ease-[cubic-bezier(0.83,0,0.17,1)] grayscale group-hover:grayscale-0"
+                  className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-1000 ease-[cubic-bezier(0.83,0,0.17,1)]"
                 />
               </div>
             </div>
