@@ -114,7 +114,7 @@ export function Header() {
                     onClick={() => setIsMenuOpen(false)}
                     className="menu-item flex items-baseline gap-4 md:gap-8 group text-[#ffffff] hover:pl-8 transition-all duration-500 w-max"
                   >
-                    <span className="font-mono text-xs md:text-sm text-[#ffffff]/30 mb-2 md:mb-6">
+                    <span className="font-sans text-xs md:text-sm text-[#ffffff]/30 mb-2 md:mb-6">
                       {link.num}
                     </span>
                     <span className="text-[12vw] md:text-[7vw] font-black uppercase tracking-tighter leading-[0.85] group-hover:italic group-hover:text-[#ffffff] transition-colors">
@@ -152,8 +152,8 @@ export function Header() {
             </a>
           </div>
           <div className="overflow-hidden text-right">
-            <span className="menu-item font-mono text-[10px] text-[#ffffff]/40 tracking-widest uppercase block mb-2">Socials</span>
-            <div className="menu-item flex gap-6 text-[#ffffff] font-mono text-xs tracking-widest uppercase">
+            <span className="menu-item font-sans text-[10px] text-[#ffffff]/40 tracking-widest uppercase block mb-2">Socials</span>
+            <div className="menu-item flex gap-6 text-[#ffffff] font-sans text-xs tracking-widest uppercase">
               <a href="#" className="hover:text-[#ffffff]/60 hover:underline underline-offset-4">Instagram</a>
               <a href="#" className="hover:text-[#ffffff]/60 hover:underline underline-offset-4">LinkedIn</a>
             </div>

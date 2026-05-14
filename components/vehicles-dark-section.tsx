@@ -117,7 +117,7 @@ export function VehiclesDarkSection() {
         <div className="flex whitespace-nowrap opacity-70">
            <div className="animate-marquee inline-block">
              {[...Array(6)].map((_, i) => (
-               <span key={i} className="text-xl md:text-3xl font-black uppercase tracking-[0.2em] mx-8 font-mono">
+               <span key={i} className="text-xl md:text-3xl font-black uppercase tracking-[0.2em] mx-8 font-sans">
                  FJM Transportes <span className="text-[#223560] mx-8">✦</span> Capacitat Total <span className="text-[#223560] mx-8">✦</span>
                </span>
              ))}
@@ -125,7 +125,7 @@ export function VehiclesDarkSection() {
            {/* Duplicate for infinite effect */}
            <div className="animate-marquee inline-block">
              {[...Array(6)].map((_, i) => (
-               <span key={`dup-${i}`} className="text-xl md:text-3xl font-black uppercase tracking-[0.2em] mx-8 font-mono">
+               <span key={`dup-${i}`} className="text-xl md:text-3xl font-black uppercase tracking-[0.2em] mx-8 font-sans">
                  FJM Transportes <span className="text-[#223560] mx-8">✦</span> Capacitat Total <span className="text-[#223560] mx-8">✦</span>
                </span>
              ))}
@@ -137,14 +137,14 @@ export function VehiclesDarkSection() {
         
         {/* Title Block */}
         <div className="flex flex-col mb-20">
-          <div className="vehicle-title-reveal inline-flex items-center px-4 py-2 rounded-full border border-white/20 text-[#ffffff] font-mono tracking-widest text-[10px] uppercase mb-8 w-fit bg-white/5 backdrop-blur-sm">
+          <div className="vehicle-title-reveal inline-flex items-center px-4 py-2 rounded-full border border-white/20 text-[#ffffff] font-sans tracking-widest text-[10px] uppercase mb-8 w-fit bg-white/5 backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-[#223560] mr-3"></span>
             Especificacions
           </div>
           
           <h2 className="text-[12vw] lg:text-[10rem] font-black uppercase tracking-tighter leading-[0.8] mb-4 text-[#ffffff]">
             <span className="vehicle-title-reveal block">La Nostra</span>
-            <span className="vehicle-title-reveal block italic font-serif text-[#223560] lowercase tracking-normal pl-0 lg:pl-32">Flota</span>
+            <span className="vehicle-title-reveal block italic font-sans text-[#223560] lowercase tracking-normal pl-0 lg:pl-32">Flota</span>
           </h2>
         </div>
 
@@ -163,7 +163,7 @@ export function VehiclesDarkSection() {
                 
                 <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6 px-4">
                   <div className="flex items-start md:items-center gap-6 md:gap-12 w-full">
-                    <span className="font-mono text-white/30 group-hover:text-black/30 text-xl transition-colors duration-500 shrink-0 mt-2 md:mt-0">
+                    <span className="font-sans text-white/30 group-hover:text-black/30 text-xl transition-colors duration-500 shrink-0 mt-2 md:mt-0">
                       {(index + 1).toString().padStart(2, '0')}
                     </span>
                     <h3 className="text-3xl md:text-4xl lg:text-[2.2vw] font-black uppercase tracking-tighter leading-[0.9] text-white group-hover:text-black transition-colors duration-500 w-full">

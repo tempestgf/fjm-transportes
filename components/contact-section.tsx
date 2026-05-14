@@ -137,33 +137,59 @@ export function ContactSection() {
           <div className="info-wrapper lg:w-1/3 border-b lg:border-b-0 lg:border-r border-[#000000]/10 py-16 lg:py-24 lg:pr-16 flex flex-col gap-10">
             
             <div className="anim-info-block group">
-              <h4 className="font-mono text-xs uppercase tracking-[0.3em] text-[#000000]/40 mb-4">Email (Comercial)</h4>
+              <h4 className="font-sans text-xs uppercase tracking-[0.3em] text-[#000000]/40 mb-4">Email (Comercial)</h4>
               <a href="mailto:fjm@fjmtransportes.com" className="text-2xl lg:text-3xl font-light tracking-tight hover:text-primary transition-colors duration-500 hover:break-all overflow-hidden break-all">
                 fjm@fjmtransportes.com
               </a>
             </div>
 
             <div className="anim-info-block group">
-              <h4 className="font-mono text-xs uppercase tracking-[0.3em] text-[#000000]/40 mb-4">Telèfons Principals</h4>
+              <h4 className="font-sans text-xs uppercase tracking-[0.3em] text-[#000000]/40 mb-4">Telèfons Principals</h4>
               <div className="flex flex-col gap-2">
                 <a href="tel:+34937775332" className="text-2xl lg:text-3xl font-light tracking-tight hover:text-primary transition-colors duration-500">
-                  <span className="text-[#000000]/40 text-lg mr-2 font-mono">Oficina:</span>937 77 53 32
+                  <span className="text-[#000000]/40 text-lg mr-2 font-sans">Oficina:</span>937 77 53 32
                 </a>
                 <a href="tel:+34687942642" className="text-2xl lg:text-3xl font-light tracking-tight hover:text-primary transition-colors duration-500">
-                  <span className="text-[#000000]/40 text-lg mr-2 font-mono">Trànsit:</span>+34 687 94 26 42
+                  <span className="text-[#000000]/40 text-lg mr-2 font-sans">Trànsit:</span>+34 687 94 26 42
                 </a>
               </div>
             </div>
 
             <div className="anim-info-block group mt-6 border-t border-[#000000]/10 pt-8">
-              <h4 className="font-mono text-xs uppercase tracking-[0.3em] text-[#000000]/40 mb-4">Seu i Magatzem</h4>
+              <h4 className="font-sans text-xs uppercase tracking-[0.3em] text-[#000000]/40 mb-4">Seus Departaments</h4>
+              <div className="flex flex-col gap-3 text-sm font-light text-[#000000]/70 leading-relaxed">
+                <div>
+                  <span className="font-semibold text-[#000000]/50 uppercase tracking-wider text-xs">Trànsit</span>
+                  <p>+34 687 94 26 42</p>
+                  <a href="mailto:fjmtrafico@fjmtransportes.com" className="hover:text-primary transition-colors duration-300">fjmtrafico@fjmtransportes.com</a>
+                </div>
+                <div>
+                  <span className="font-semibold text-[#000000]/50 uppercase tracking-wider text-xs">Comercial</span>
+                  <p>+34 669 42 23 75</p>
+                  <a href="mailto:fjm@fjmtransportes.com" className="hover:text-primary transition-colors duration-300">fjm@fjmtransportes.com</a>
+                </div>
+                <div>
+                  <span className="font-semibold text-[#000000]/50 uppercase tracking-wider text-xs">Administració</span>
+                  <p>+34 669 42 23 50</p>
+                  <a href="mailto:administracion@administracionfjmtransportes.com" className="hover:text-primary transition-colors duration-300 break-all">administracion@administracionfjmtransportes.com</a>
+                </div>
+                <div>
+                  <span className="font-semibold text-[#000000]/50 uppercase tracking-wider text-xs">Magatzem</span>
+                  <p>+34 616 71 94 66</p>
+                  <a href="mailto:trafico2@fjmtransportes.com" className="hover:text-primary transition-colors duration-300">trafico2@fjmtransportes.com</a>
+                </div>
+              </div>
+            </div>
+
+            <div className="anim-info-block group border-t border-[#000000]/10 pt-8">
+              <h4 className="font-sans text-xs uppercase tracking-[0.3em] text-[#000000]/40 mb-4">Seu i Magatzem</h4>
               <p className="text-xl lg:text-2xl font-light tracking-tight text-[#000000]/80 leading-relaxed mb-4">
                 Carrer Tres Rieres, Nave 20<br/>
                 Polígon Industrial La Magarola<br/>
                 08292 Esparreguera, Barcelona
               </p>
               <p className="text-sm font-light text-[#000000]/40">
-                1.100 m2 per a transport i emmagatzematge de mercaderies.
+                1.100 m² per a transport i emmagatzematge de mercaderies.
               </p>
             </div>
 
@@ -176,7 +202,7 @@ export function ContactSection() {
               <div className="flex flex-col gap-8 lg:gap-12">
                 {/* Fila 1 */}
                 <div className="anim-form-row relative group flex flex-col md:flex-row md:items-end gap-4 border-b border-[#000000]/20 pb-4">
-                  <span className="font-mono text-sm text-primary mb-2 md:mb-0 md:mr-6 shrink-0">01</span>
+                  <span className="font-sans text-sm text-primary mb-2 md:mb-0 md:mr-6 shrink-0">01</span>
                   <input 
                     type="text" 
                     required
@@ -188,7 +214,7 @@ export function ContactSection() {
 
                 {/* Fila 2 */}
                 <div className="anim-form-row relative group flex flex-col md:flex-row md:items-end gap-4 border-b border-[#000000]/20 pb-4">
-                  <span className="font-mono text-sm text-primary mb-2 md:mb-0 md:mr-6 shrink-0">02</span>
+                  <span className="font-sans text-sm text-primary mb-2 md:mb-0 md:mr-6 shrink-0">02</span>
                   <input 
                     type="email" 
                     required
@@ -201,7 +227,7 @@ export function ContactSection() {
                 {/* Fila 3 y 4 (Empresa / Telef) */}
                 <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
                   <div className="anim-form-row relative group flex-1 flex flex-col md:flex-row md:items-end gap-4 border-b border-[#000000]/20 pb-4">
-                    <span className="font-mono text-sm text-primary mb-2 md:mb-0 md:mr-4 shrink-0">03</span>
+                    <span className="font-sans text-sm text-primary mb-2 md:mb-0 md:mr-4 shrink-0">03</span>
                     <input 
                       type="text" 
                       placeholder="Empresa (Opcional)" 
@@ -211,7 +237,7 @@ export function ContactSection() {
                   </div>
                   
                   <div className="anim-form-row relative group flex-1 flex flex-col md:flex-row md:items-end gap-4 border-b border-[#000000]/20 pb-4">
-                    <span className="font-mono text-sm text-primary mb-2 md:mb-0 md:mr-4 shrink-0">04</span>
+                    <span className="font-sans text-sm text-primary mb-2 md:mb-0 md:mr-4 shrink-0">04</span>
                     <input 
                       type="tel" 
                       placeholder="Telèfon de contacte" 
@@ -223,7 +249,7 @@ export function ContactSection() {
 
                 {/* Fila 5 Mensaje */}
                 <div className="anim-form-row relative group flex flex-col md:flex-row gap-4 border-b border-[#000000]/20 pb-4 mt-4">
-                  <span className="font-mono text-sm text-primary md:mr-6 shrink-0 pt-2">05</span>
+                  <span className="font-sans text-sm text-primary md:mr-6 shrink-0 pt-2">05</span>
                   <textarea 
                     required
                     placeholder="Expliqui'ns les seves necessitats de transport..." 

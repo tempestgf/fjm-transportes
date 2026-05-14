@@ -66,7 +66,7 @@ function ServiceItem({ group, index }: { group: ServiceGroup, index: number }) {
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="flex items-center gap-6 md:gap-12">
-          <span className="text-xl md:text-2xl font-mono text-[#000000]/30 font-bold group-hover:text-primary transition-colors duration-500">
+          <span className="text-xl md:text-2xl font-sans text-[#000000]/30 font-bold group-hover:text-primary transition-colors duration-500">
             {group.id}
           </span>
           <h3 className="text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter text-[#000000] group-hover:text-primary transition-colors duration-500">
@@ -93,12 +93,12 @@ function ServiceItem({ group, index }: { group: ServiceGroup, index: number }) {
               </p>
 
               <div className="flex flex-col gap-4">
-                <p className="font-mono text-xs tracking-widest uppercase text-[#000000]/40 border-b border-[#000000]/10 pb-4 mb-2">
+                <p className="font-sans text-xs tracking-widest uppercase text-[#000000]/40 border-b border-[#000000]/10 pb-4 mb-2">
                   Especificacions operatives /
                 </p>
                 <ul className="space-y-4">
                   {group.items.map((item: string, i: number) => (
-                    <li key={i} className="flex items-center gap-4 text-[#000000]/80 font-mono text-sm uppercase tracking-wider">
+                    <li key={i} className="flex items-center gap-4 text-[#000000]/80 font-sans text-sm uppercase tracking-wider">
                       <span className="text-primary text-xs font-bold">[{`0${i + 1}`}]</span>
                       {item}
                     </li>
@@ -172,24 +172,24 @@ export function ServicesSection() {
 
           {/* Columna Izquierda: Título + Imagen — fluye normalmente (el contenido alto) */}
           <div className="lg:w-2/5 flex flex-col">
-            <div className="services-title-reveal inline-flex items-center px-4 py-2 rounded-full border border-[#000000]/10 text-[#000000] font-mono tracking-widest text-[10px] uppercase mb-12 bg-[#ffffff] backdrop-blur-md">
+            <div className="services-title-reveal inline-flex items-center px-4 py-2 rounded-full border border-[#000000]/10 text-[#000000] font-sans tracking-widest text-[10px] uppercase mb-12 bg-[#ffffff] backdrop-blur-md">
               <span className="w-2 h-2 rounded-full bg-primary mr-3"></span>
               Catàleg de Serveis
             </div>
 
             <h2 className="text-6xl sm:text-7xl lg:text-[7rem] xl:text-[8rem] font-black uppercase tracking-tighter leading-[0.85] text-[#000000] mb-8">
               <span className="services-title-reveal block">Serveis</span>
-              <span className="services-title-reveal block italic font-serif text-primary lowercase tracking-normal">Globals</span>
+              <span className="services-title-reveal block italic font-sans text-primary lowercase tracking-normal">Globals</span>
             </h2>
 
-            <p className="services-title-reveal font-mono text-xs uppercase tracking-[0.2em] text-[#000000]/60 max-w-[280px] leading-relaxed border-l-2 border-primary pl-6">
+            <p className="services-title-reveal font-sans text-xs uppercase tracking-[0.2em] text-[#000000]/60 max-w-[280px] leading-relaxed border-l-2 border-primary pl-6">
               Solucions logístiques integrals i personalitzades. Des d'entrega d'última milla fins a transports especials d'alt tonatge.
             </p>
 
             {/* Botón CTA */}
             <div className="services-title-reveal mt-16">
               <a href="#contacte" className="group inline-flex items-center gap-6 border border-[#000000]/10 rounded-full pl-8 pr-4 py-4 bg-[#ffffff] hover:bg-[#ffffff] transition-all duration-500 shadow-sm">
-                <span className="font-mono text-xs uppercase tracking-widest font-bold text-[#000000]">Sol·licitar Pressupost</span>
+                <span className="font-sans text-xs uppercase tracking-widest font-bold text-[#000000]">Sol·licitar Pressupost</span>
                 <div className="w-12 h-12 rounded-full bg-[#ffffff] group-hover:bg-primary flex items-center justify-center transition-colors duration-500 border border-[#000000]/5 shadow-sm">
                   <Plus className="w-6 h-6 text-[#000000] group-hover:text-white transition-colors duration-500" />
                 </div>

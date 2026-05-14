@@ -93,23 +93,6 @@ export function VehiclesSection() {
         }
       })
 
-      // 3. Animación de las filas de la tabla de especificaciones
-      const rows = gsap.utils.toArray(".spec-row")
-      gsap.fromTo(rows, 
-        { opacity: 0, x: -50 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.8,
-          stagger: 0.05,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: listRef.current,
-            start: "top 75%",
-          }
-        }
-      )
-
       // 4. Aparición del modelo 3D: De pequeño a grande sin difuminar (opacity fija)
       gsap.fromTo(".model-3d-container", 
         { scale: 0, y: 100, opacity: 1 },
@@ -117,12 +100,11 @@ export function VehiclesSection() {
           scale: 1,
           y: 0,
           opacity: 1,
-          ease: "power2.out",
+          duration: 1.2,
+          ease: "back.out(1.2)",
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top 95%",
-            end: "top 20%",
-            scrub: 1,
+            start: "top 80%",
           }
         }
       )
@@ -163,7 +145,7 @@ export function VehiclesSection() {
     <section 
       ref={sectionRef} 
       id="vehicles" 
-      className="relative z-50 w-full overflow-hidden bg-[#f4f4f4] text-[#000000] pt-12 pb-24"
+      className="relative z-50 w-full overflow-hidden bg-[#ffffff] text-[#000000] pt-12 pb-24"
     >
       {/* Background pattern para mantener la continuidad */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-[0.03]" style={{ backgroundImage: "radial-gradient(#000000 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
@@ -200,66 +182,34 @@ export function VehiclesSection() {
         {/* Cabecera Brutalista */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-20 md:mb-32 relative z-10 gap-8">
           <div className="flex flex-col pointer-events-auto">
-            <div className="reveal-text inline-flex w-fit items-center px-4 py-2 rounded-full border border-[#000000]/10 text-[#000000] font-mono tracking-widest text-[10px] uppercase mb-12 bg-[#ffffff] backdrop-blur-md">
+            <div className="reveal-text inline-flex w-fit items-center px-4 py-2 rounded-full border border-[#000000]/10 text-[#000000] font-sans tracking-widest text-[10px] uppercase mb-12 bg-[#ffffff] backdrop-blur-md">
               <span className="w-2 h-2 rounded-full bg-primary mr-3"></span>
               Capacitat Operativa
             </div>
             
             <h2 className="text-6xl sm:text-7xl lg:text-[8rem] xl:text-[10rem] font-black uppercase tracking-tighter leading-[0.8] text-[#000000]">
               <span className="reveal-text block relative z-20">Els nostres</span>
-              <span className="reveal-text block italic font-serif text-primary lowercase tracking-normal relative z-20">vehicles</span>
+              <span className="reveal-text block italic font-sans text-primary lowercase tracking-normal relative z-20">vehicles</span>
             </h2>
           </div>
         </div>
 
-        {/* Línea separadora principal */}
-        <div className="w-full h-px bg-[#ffffff]/10 mb-12" />
-
-        {/* Tabla de Especificaciones Ténicas */}
-        <div className="w-full flex justify-center">
-          <div ref={listRef} className="w-full max-w-6xl flex flex-col">
-            {/* Cabecera de la tabla (Solo visible en Desktop) */}
-            <div className="hidden md:grid grid-cols-12 gap-8 pb-4 border-b border-[#000000]/20 font-mono text-xs uppercase tracking-widest text-primary">
-              <div className="col-span-2">Mètrica Clau</div>
-              <div className="col-span-4">Categoria</div>
-              <div className="col-span-6">Especificació Tècnica</div>
+        {/* Galería de imágenes de vehículos */}
+        <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mt-8">
+          {Array.from({ length: 16 }, (_, i) => (
+            <div key={i} className="aspect-video w-full rounded-2xl overflow-hidden shadow-lg bg-white flex items-center justify-center">
+              <img
+                src={`/media/fleet-truck-${(i+1).toString().padStart(2, '0')}.jpeg`}
+                alt={`Vehículo de flota ${i + 1}`}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
             </div>
-
-            {/* Filas de la Tabla */}
-            {vehicleSpecs.map((spec, index) => (
-              <div 
-                key={index} 
-                className="spec-row group grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-center py-6 md:py-8 border-b border-[#000000]/10 hover:border-primary transition-colors duration-500"
-              >
-                {/* Métrica Gigante */}
-                <div className="col-span-1 md:col-span-2">
-                  <span className="text-3xl md:text-4xl font-black tracking-tighter text-[#000000] group-hover:pl-2 transition-all duration-300">
-                    {spec.metric}
-                  </span>
-                </div>
-                
-                {/* Categoría / Título */}
-                <div className="col-span-1 md:col-span-4 flex items-center gap-4">
-                  <ArrowRight className="w-4 h-4 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-primary" />
-                  <span className="text-xl md:text-2xl font-bold uppercase tracking-tight text-[#000000]/80 group-hover:text-primary transition-colors duration-300">
-                    {spec.title}
-                  </span>
-                </div>
-
-                {/* Descripción detallada */}
-                <div className="col-span-1 md:col-span-6">
-                  <p className="text-sm md:text-base font-mono text-[#000000]/60 uppercase tracking-wide leading-relaxed">
-                    {spec.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+          ))}
         </div>
       </div>
 
       {/* Footer Brutalista: Galería de Imágenes Parallax */}
-      <div className="massive-footer-container relative w-full h-[40vh] md:h-[50vh] mt-24 flex items-center overflow-hidden bg-[#f4f4f4] border-t border-[#000000]/10">
+      <div className="massive-footer-container relative w-full h-[40vh] md:h-[50vh] mt-24 flex items-center overflow-hidden bg-[#ffffff] border-t border-[#000000]/10">
         <div className="absolute inset-0 opacity-5 z-0" style={{ backgroundImage: "radial-gradient(#000000 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
         
         <div className="massive-footer-gallery flex gap-4 md:gap-8 whitespace-nowrap px-8 md:px-12 z-10 w-max pointer-events-auto cursor-ew-resize">

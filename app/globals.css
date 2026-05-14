@@ -10,19 +10,19 @@
   --card-foreground: #000000;
   --popover: #ffffff;
   --popover-foreground: #000000;
-  --primary: #223560;
+  --primary: #004C96;
   --primary-foreground: #ffffff;
   --secondary: #000000;
   --secondary-foreground: #ffffff;
   --muted: #f2f2f2;
   --muted-foreground: #000000;
-  --accent: #223560;
+  --accent: #004C96;
   --accent-foreground: #ffffff;
   --destructive: #000000;
   --destructive-foreground: #ffffff;
   --border: #d9d9d9;
   --input: #d9d9d9;
-  --ring: #223560;
+  --ring: #004C96;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -31,12 +31,12 @@
   --radius: 0.625rem;
   --sidebar: #ffffff;
   --sidebar-foreground: #000000;
-  --sidebar-primary: #223560;
+  --sidebar-primary: #004C96;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #f2f2f2;
   --sidebar-accent-foreground: #000000;
   --sidebar-border: #d9d9d9;
-  --sidebar-ring: #223560;
+  --sidebar-ring: #004C96;
 }
 
 .dark {
@@ -46,36 +46,37 @@
   --card-foreground: #ffffff;
   --popover: #000000;
   --popover-foreground: #ffffff;
-  --primary: #223560;
+  --primary: #004C96;
   --primary-foreground: #ffffff;
   --secondary: #ffffff;
   --secondary-foreground: #000000;
   --muted: #1a1a1a;
   --muted-foreground: #ffffff;
-  --accent: #223560;
+  --accent: #004C96;
   --accent-foreground: #ffffff;
   --destructive: #ffffff;
   --destructive-foreground: #000000;
   --border: #2a2a2a;
   --input: #2a2a2a;
-  --ring: #223560;
-  --chart-1: #223560;
+  --ring: #004C96;
+  --chart-1: #004C96;
   --chart-2: #ffffff;
   --chart-3: #000000;
   --chart-4: #7f8aa8;
   --chart-5: #5d6576;
   --sidebar: #000000;
   --sidebar-foreground: #ffffff;
-  --sidebar-primary: #223560;
+  --sidebar-primary: #004C96;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #1a1a1a;
   --sidebar-accent-foreground: #ffffff;
   --sidebar-border: #2a2a2a;
-  --sidebar-ring: #223560;
+  --sidebar-ring: #004C96;
 }
 
 @theme inline {
-  /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-heading);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -121,6 +122,10 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-heading);
   }
 
   /* Regla global: cursor "modo pulsar" en botones, enlaces y cualquier elemento interactivo con hover */

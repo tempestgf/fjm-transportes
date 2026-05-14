@@ -124,15 +124,15 @@ export function AboutSection() {
           {/* Columna Izquierda: Los 15 Años */}
           <div className="lg:w-1/3 flex flex-col justify-start">
             <div className="reveal-text lg:sticky lg:top-32">
-              <div className="inline-flex items-center px-4 py-2 rounded-full border border-[#000000]/10 text-[#000000] font-mono tracking-widest text-[10px] uppercase mb-12 bg-[#ffffff]/50 backdrop-blur-md">
+              <div className="inline-flex items-center px-4 py-2 rounded-full border border-[#000000]/10 text-[#000000] font-sans tracking-widest text-[10px] uppercase mb-12 bg-[#ffffff]/50 backdrop-blur-md">
                 <span className="w-2 h-2 rounded-full bg-primary mr-3"></span>
                 Sobre Nosaltres
               </div>
 
               <div className="text-[8rem] lg:text-[11rem] text-[#000000] font-black tracking-tighter leading-none mb-4 flex items-start">
-                15<span className="text-primary text-6xl mt-4">+</span>
+                25<span className="text-primary text-6xl mt-4">+</span>
               </div>
-              <div className="font-mono text-xs uppercase tracking-[0.25em] text-[#000000]/60 max-w-[200px] leading-relaxed">
+              <div className="font-sans text-xs uppercase tracking-[0.25em] text-[#000000]/60 max-w-[200px] leading-relaxed">
                 Anys d'experiència movint el que els altres no poden
               </div>
             </div>
@@ -142,7 +142,7 @@ export function AboutSection() {
           <div className="lg:w-2/3 pt-4 lg:pt-16">
             <h2 className="text-5xl sm:text-7xl lg:text-[6.5rem] font-black uppercase tracking-tighter leading-[0.85] mb-16 text-[#000000]">
               <span className="reveal-text block">Líders en</span>
-              <span className="reveal-text block italic font-serif text-primary lowercase tracking-normal">especials</span>
+              <span className="reveal-text block italic font-sans text-primary lowercase tracking-normal">especials</span>
               <span className="reveal-text block">i urgents</span>
             </h2>
 
