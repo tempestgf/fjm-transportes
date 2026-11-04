@@ -7,31 +7,41 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 export function SmoothScrolling({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    // Registramos ScrollTrigger por si no lo está globalmente
-    if (typeof window !== "undefined") {
-      gsap.registerPlugin(ScrollTrigger)
-    }
+    gsap.registerPlugin(ScrollTrigger)
+    ScrollTrigger.config({ ignoreMobileResize: true })
+    document.fonts?.ready.then(() => ScrollTrigger.refresh())
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
 
     const lenis = new Lenis({
-      duration: 1.4, // Un poco más lento para más elegancia "premium"
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Curva suave Awwwards
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
+      duration: 1.15,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      wheelMultiplier: 1.1,
-      touchMultiplier: 2,
     })
 
-    // Sincronizar Lenis con ScrollTrigger
-    lenis.on('scroll', ScrollTrigger.update)
-
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000)
-    })
-
+    lenis.on("scroll", ScrollTrigger.update)
+    const tick = (time: number) => lenis.raf(time * 1000)
+    gsap.ticker.add(tick)
     gsap.ticker.lagSmoothing(0)
 
+    // Anchors propis: amb els pins, l'opció `anchors` de Lenis es quedava curta
+    // quan el recorregut travessava una secció fixada. Un destí numèric és exacte.
+    const onClick = (e: MouseEvent) => {
+      const link = (e.target as Element).closest?.('a[href^="#"]')
+      const hash = link?.getAttribute("href")
+      const target = hash && hash.length > 1 ? document.querySelector(hash) : null
+      if (!target) return
+      e.preventDefault()
+      lenis.resize()
+      const y = target.getBoundingClientRect().top + window.scrollY
+      lenis.scrollTo(y, { duration: 1.4, force: true })
+      history.replaceState(null, "", hash)
+    }
+    document.addEventListener("click", onClick)
+
     return () => {
+      document.removeEventListener("click", onClick)
+      gsap.ticker.remove(tick)
       lenis.destroy()
     }
   }, [])

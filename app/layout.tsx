@@ -1,37 +1,29 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter, Courier_Prime } from "next/font/google"
-import { Suspense } from "react"
+import { Archivo } from "next/font/google"
 import "./globals.css"
+import "./site.css"
+import { SmoothScrolling } from "@/components/smooth-scrolling"
 
 const faviconHref = new URL("./FJM_LOGO.ico", import.meta.url).href
 
-const inter = Inter({
+// Una sola família variable: l'eix d'amplada fa de display (125) i de cota tècnica (62).
+const archivo = Archivo({
   subsets: ["latin"],
-  variable: "--font-heading",
-  weight: ["400", "500", "600", "700", "900"],
-  display: "swap",
-})
-
-const courierPrime = Courier_Prime({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  weight: ["400", "700"],
+  variable: "--font-archivo",
+  axes: ["wdth"],
   display: "swap",
 })
 
 export const metadata: Metadata = {
-  title: "FJM Transportes - Empresa de Transports a Catalunya",
+  title: "FJM Transportes | Transport nacional, internacional i especial des d'Esparreguera",
   description:
-    "Empresa especialitzada en transports convencionals i serveis urgents amb més de 15 anys d'experiència. Flota completa de furgonetes a camions de 38m.",
-  keywords: "transport, camions, furgonetes, Catalunya, Barcelona, logística, transport urgent",
-  generator: 'v0.app',
+    "Transports convencionals, serveis urgents i càrregues especials. Camions grua fins a 38 m, gòndoles fins a 90 Tn i plataformes extensibles fins a 30 m.",
+  keywords: "transport, transport especial, camions grua, gòndoles, Esparreguera, Barcelona, logística, transport urgent",
   icons: {
     icon: faviconHref,
   },
 }
-
-import { SmoothScrolling } from "@/components/smooth-scrolling"
 
 export default function RootLayout({
   children,
@@ -39,11 +31,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ca" className={`${inter.variable} ${courierPrime.variable}`}>
-      <body className="font-sans antialiased bg-background text-foreground">
-        <SmoothScrolling>
-          <Suspense fallback={null}>{children}</Suspense>
-        </SmoothScrolling>
+    <html lang="ca" className={archivo.variable}>
+      <body>
+        <SmoothScrolling>{children}</SmoothScrolling>
       </body>
     </html>
   )
