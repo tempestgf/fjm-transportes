@@ -1,6 +1,8 @@
 "use client"
 
 import { type FormEvent, useEffect, useState } from "react"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { services } from "./services"
 
 const departments = [
@@ -24,6 +26,23 @@ export function Contact() {
     const onService = (e: Event) => setService((e as CustomEvent<string>).detail)
     window.addEventListener("fjm:service", onService)
     return () => window.removeEventListener("fjm:service", onService)
+  }, [])
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger)
+    const mm = gsap.matchMedia()
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      gsap.fromTo(
+        "#contact-title",
+        { "--w": 62 },
+        {
+          "--w": 125,
+          ease: "none",
+          scrollTrigger: { trigger: "#contact-title", start: "top 92%", end: "top 40%", scrub: true },
+        },
+      )
+    })
+    return () => mm.revert()
   }, [])
 
   // Encara no hi ha servidor de correu: la petició s'obre redactada al correu del client.

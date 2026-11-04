@@ -7,10 +7,15 @@ import { Services } from "@/components/site/services"
 import { Depot } from "@/components/site/depot"
 import { Contact } from "@/components/site/contact"
 import { SiteFooter } from "@/components/site/site-footer"
+import { FleetDefs } from "@/components/site/fleet-art"
 
 export default function HomePage() {
   return (
     <>
+      {/* Degradats dels vehicles: la flota i els serveis els comparteixen */}
+      <svg className="absolute size-0" aria-hidden="true">
+        <FleetDefs />
+      </svg>
       <Nav />
       <main>
         <Hero />

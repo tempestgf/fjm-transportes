@@ -8,6 +8,8 @@
   --signal: #d8232a;
   --gutter: clamp(16px, 4vw, 64px);
   --ease: cubic-bezier(0.7, 0, 0.2, 1);
+  /* Escala dels vehicles als serveis: tots amb els mateixos píxels per metre */
+  --metre: clamp(15.5px, 3.4vw, 56px);
 }
 
 html {
@@ -54,29 +56,46 @@ a {
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
-  transition: background-color 0.25s, color 0.25s, border-color 0.25s;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition: color 0.35s var(--ease), border-color 0.35s;
+}
+/* En passar-hi, el color puja de baix a dalt, com la tela */
+.btn::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -2px;
+  background: var(--fill);
+  transform: translateY(101%);
+  transition: transform 0.45s var(--ease);
+}
+.btn:hover::before,
+.btn:focus-visible::before {
+  transform: none;
 }
 .btn--navy {
+  --fill: var(--lona);
   background: var(--navy);
   color: #fff;
 }
-.btn--navy:hover {
-  background: var(--lona);
-}
 .btn--ghost {
+  --fill: #fff;
   border-color: #fff;
   color: #fff;
 }
-.btn--ghost:hover {
-  background: #fff;
+.btn--ghost:hover,
+.btn--ghost:focus-visible {
   color: var(--navy);
 }
 .btn--white {
+  --fill: var(--sky);
   background: #fff;
   color: var(--lona);
 }
-.btn--white:hover {
-  background: var(--sky);
+.btn--white:hover,
+.btn--white:focus-visible {
   color: var(--navy);
 }
 
@@ -168,14 +187,33 @@ a {
     font-weight: 800;
     font-stretch: 118%;
     line-height: 1.2;
-    clip-path: inset(0 0 0 100%);
+    clip-path: inset(100% 0 0 0);
     visibility: hidden;
-    transition: clip-path 0.5s var(--ease), visibility 0s 0.5s;
+    transition: clip-path 0.6s var(--ease), visibility 0s 0.6s;
   }
   .nav--open .nav__links {
     clip-path: inset(0);
     visibility: visible;
-    transition: clip-path 0.5s var(--ease);
+    transition: clip-path 0.6s var(--ease);
+  }
+  .nav__links a {
+    font-stretch: 62%;
+    transition: font-stretch 0.8s var(--ease);
+  }
+  .nav--open .nav__links a {
+    font-stretch: 118%;
+  }
+  .nav__links a:nth-child(2) {
+    transition-delay: 0.05s;
+  }
+  .nav__links a:nth-child(3) {
+    transition-delay: 0.1s;
+  }
+  .nav__links a:nth-child(4) {
+    transition-delay: 0.15s;
+  }
+  .nav__links a:nth-child(5) {
+    transition-delay: 0.2s;
   }
 }
 
@@ -198,7 +236,8 @@ a {
   object-fit: cover;
   object-position: 50% 100%;
   transform-origin: 50% 70%;
-  animation: hero-settle 2.4s var(--ease) both;
+  /* Va a la par de la tela: comença a moure's quan ella ja puja */
+  animation: hero-settle 3.4s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both;
 }
 @keyframes hero-settle {
   from {
@@ -224,6 +263,11 @@ a {
   line-height: 0.98;
   letter-spacing: -0.025em;
   color: #fff;
+}
+.hero__line {
+  display: block;
+  white-space: nowrap;
+  font-stretch: calc(var(--w, 125) * 1%);
 }
 .hero__foot {
   display: flex;
@@ -360,7 +404,33 @@ main > :not(.hero) {
   min-height: 560px;
   overflow: hidden;
   display: none;
-  background: linear-gradient(180deg, #d4effd 0, var(--sky) 62%);
+  background: linear-gradient(180deg, #bfe6fb 0, var(--sky) 44%, #d9f1fd 80%);
+  --ink: var(--navy);
+  --figure: var(--lona);
+}
+.scale--live .scale__stage.is-night {
+  --ink: #fff;
+  --figure: #fff;
+}
+.scale__sky {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+.scale__sky--dusk {
+  background: linear-gradient(180deg, #0d4a96 0, #3b83cc 38%, #a6c8e6 62%, #f7dcc2 80%);
+}
+.scale__sky--night {
+  background: linear-gradient(180deg, #021023 0, var(--navy) 46%, #0b3a72 80%);
+}
+.scale__back,
+.scale__glow {
+  position: absolute;
+  inset: 0;
+}
+.scale__glow {
+  opacity: 0;
+  pointer-events: none;
 }
 .scale--live .scale__stage {
   display: block;
@@ -378,7 +448,7 @@ main > :not(.hero) {
   position: absolute;
   inset: 80% 0 0;
   background: linear-gradient(180deg, #24384e 0, var(--navy) 34%);
-  border-top: 3px solid rgba(255, 255, 255, 0.55);
+  border-top: 2px solid rgba(255, 255, 255, 0.32);
 }
 .scale__ruler {
   position: absolute;
@@ -394,9 +464,11 @@ main > :not(.hero) {
 }
 .scale__title {
   margin: 0 0 0.25rem;
+  color: var(--ink);
   font-size: 1.125rem;
   font-weight: 700;
   font-stretch: 112%;
+  transition: color 0.5s;
 }
 .scale__list {
   position: relative;
@@ -429,10 +501,11 @@ main > :not(.hero) {
   font-stretch: 125%;
   line-height: 1;
   letter-spacing: -0.03em;
-  color: var(--lona);
+  color: var(--figure);
 }
 .scale__name {
   margin: 0.35rem 0 0;
+  color: var(--ink);
   font-size: clamp(1.25rem, 2vw, 1.6rem);
   font-weight: 700;
   line-height: 1.2;
@@ -440,6 +513,7 @@ main > :not(.hero) {
 .scale__text {
   margin: 0.15rem 0 0;
   max-width: 46ch;
+  color: var(--ink);
   line-height: 1.35;
 }
 .scale__outro {
@@ -460,6 +534,7 @@ main > :not(.hero) {
 .scale__outro-text {
   margin: 0;
   max-width: 13em;
+  color: var(--ink);
   font-size: clamp(1.75rem, 4vw, 3.5rem);
   font-weight: 800;
   font-stretch: 118%;
@@ -483,7 +558,7 @@ main > :not(.hero) {
   min-height: 0;
   padding: 4rem var(--gutter);
 }
-.scale:not(.scale--live) :is(.scale__art, .scale__road, .scale__note, .scale__outro) {
+.scale:not(.scale--live) :is(.scale__art, .scale__back, .scale__glow, .scale__sky, .scale__road, .scale__note, .scale__outro) {
   display: none;
 }
 .scale:not(.scale--live) .scale__copy {
@@ -799,10 +874,11 @@ main > :not(.hero) {
   flex-wrap: wrap;
 }
 .contact__head h2 {
+  --w: 125;
   margin: 0;
   font-size: clamp(4rem, 15vw, 16rem);
   font-weight: 800;
-  font-stretch: 125%;
+  font-stretch: calc(var(--w) * 1%);
   line-height: 0.95;
   letter-spacing: -0.035em;
 }

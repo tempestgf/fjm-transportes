@@ -1,19 +1,19 @@
 "use client"
 
-import { useEffect, useMemo, useRef } from "react"
+import { useEffect, useRef } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import {
   Articulated,
   CraneTruck,
   ExtendablePlatform,
-  FleetDefs,
   Gondola,
   LightTruck,
+  Person,
   RigidTruck,
   Van,
-  montserratPath,
 } from "./fleet-art"
+import { Backdrop, FleetLights, RIDGE_PEAK } from "./fleet-land"
 
 /** Posició de cada vehicle a la carretera, en metres. */
 const POS = { van: 0, light: 9.5, rigid: 21, truck: 35, crane: 62, gondola: 88, platform: 146 }
@@ -87,8 +87,6 @@ function buildSchedule() {
 
 export function FleetScale() {
   const root = useRef<HTMLElement>(null)
-  const ridge = useMemo(() => montserratPath(2600, 300), [])
-  const farRidge = useMemo(() => montserratPath(2600, 300, 31), [])
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
@@ -97,6 +95,23 @@ export function FleetScale() {
     const world = el.querySelector<SVGGElement>("[data-world]")!
     const mountain = el.querySelector<SVGGElement>("[data-ridge]")!
     const farMountain = el.querySelector<SVGGElement>("[data-ridge-far]")!
+    const foothills = el.querySelector<SVGGElement>("[data-hills]")!
+    const yard = el.querySelector<SVGGElement>("[data-yard]")!
+    const yardLights = el.querySelector<SVGGElement>("[data-yard-lights]")!
+    const cloudLayer = el.querySelector<SVGGElement>("[data-clouds]")!
+    const starLayer = el.querySelector<SVGGElement>("[data-stars]")!
+    const glowWorld = el.querySelector<SVGGElement>("[data-glow-world]")!
+    const glow = el.querySelector<SVGSVGElement>(".scale__glow")!
+    const tailLamp = el.querySelector<SVGCircleElement>("[data-tail]")!
+    const tipLamp = el.querySelector<SVGCircleElement>("[data-tip]")!
+    const art = el.querySelector<SVGSVGElement>(".scale__art")!
+    const dusk = el.querySelector<HTMLElement>(".scale__sky--dusk")!
+    const night = el.querySelector<HTMLElement>(".scale__sky--night")!
+    const toned = Array.from(el.querySelectorAll<SVGElement>("[data-tone]")).map((node) => ({
+      node,
+      attr: node.tagName === "stop" ? "stop-color" : node.dataset.toneAttr || "fill",
+      mix: gsap.utils.interpolate(node.dataset.tone!.split(" ")) as unknown as (p: number) => string,
+    }))
     const vehicles = Array.from(el.querySelectorAll<SVGGElement>("[data-span]")).map((node) => {
       const [a, b] = node.dataset.span!.split(" ").map(Number)
       return { node, a, b, shown: true }
@@ -201,7 +216,28 @@ export function FleetScale() {
       outro.classList.toggle("is-active", i === shots.length)
     }
 
+    // La flota treballa tot el dia: la grua arriba de tarda i la plataforma, de nit
+    let hour = -1
+    const paintHour = (t: number, current: number) => {
+      const d = sine(range(t, slots[4].leave - 0.25, slots[5].arrive + 0.35))
+      const n = sine(range(t, slots[5].arrive + 0.2, slots[6].arrive + 1.4))
+      const tone = (d + n) / 2
+      stage.classList.toggle("is-night", current >= 5)
+      if (tone === hour) return
+      hour = tone
+      dusk.style.opacity = String(d)
+      night.style.opacity = String(n)
+      for (const { node, attr, mix } of toned) node.setAttribute(attr, mix(tone))
+      starLayer.setAttribute("opacity", String(n))
+      cloudLayer.setAttribute("opacity", String(1 - 0.35 * d - 0.55 * n))
+      const lights = range(d, 0.55, 1)
+      glow.style.opacity = String(lights)
+      yardLights.setAttribute("opacity", String(lights))
+      art.style.filter = tone > 0 ? `brightness(${1 - 0.14 * d - 0.3 * n}) saturate(${1 - 0.2 * n})` : ""
+    }
+
     const render = (p: number) => {
+      if (!W) return
       const t = p * total
       const all: Frame[] = [...shots, finalShot]
 
@@ -228,13 +264,22 @@ export function FleetScale() {
         }
       }
       const scale = Math.exp(cam.ls)
-      world.setAttribute(
-        "transform",
-        `translate(${W / 2 - cam.x * scale} ${ground}) scale(${scale})`,
-      )
-      const ridgeH = H * 0.22
-      mountain.setAttribute("transform", `translate(${-120 - cam.x * 2.4} ${horizon - ridgeH}) scale(1 ${ridgeH / 300})`)
-      farMountain.setAttribute("transform", `translate(${-60 - cam.x * 1.1} ${horizon - ridgeH * 1.25}) scale(1 ${(ridgeH * 1.25) / 300})`)
+      const place = `translate(${W / 2 - cam.x * scale} ${ground}) scale(${scale})`
+      world.setAttribute("transform", place)
+      glowWorld.setAttribute("transform", place)
+
+      // Paisatge: com més a prop, més corre. El cim queda sempre a l'abast de la càmera.
+      const sx = Math.min(1.5, Math.max(0.5, W / 1440))
+      const ridgeH = H * 0.34
+      const peak = W * 0.62 - RIDGE_PEAK * sx
+      const slide = (factor: number) => peak + (70 - cam.x) * factor * sx
+      mountain.setAttribute("transform", `translate(${slide(2.4)} ${horizon - ridgeH}) scale(${sx} ${ridgeH / 300})`)
+      farMountain.setAttribute("transform", `translate(${slide(1.2)} ${horizon - ridgeH * 1.22}) scale(${sx} ${(ridgeH * 1.22) / 300})`)
+      const hillsH = H * 0.13
+      foothills.setAttribute("transform", `translate(${slide(4.2)} ${horizon - hillsH}) scale(${sx} ${hillsH / 300})`)
+      cloudLayer.setAttribute("transform", `translate(${slide(0.7) + RIDGE_PEAK * sx - W * 0.5} 0) scale(${sx} 1)`)
+      const near = Math.min(1.35, Math.max(0.72, Math.pow(scale / 30, 0.25))) * Math.max(0.7, sx)
+      yard.setAttribute("transform", `translate(${W / 2 - (cam.x * 9 + 200) * near} ${horizon}) scale(${near})`)
 
       // Només es pinta el que és a la pantalla: al mòbil l'escena sencera pesa massa
       const left = cam.x - W / 2 / scale - 3
@@ -248,6 +293,7 @@ export function FleetScale() {
       }
       drawRuler(cam.x, scale)
       setActive(current)
+      paintHour(t, current)
 
       // Ploma: primer s'aixeca, després s'estén
       const craneAt = slots[4]
@@ -267,6 +313,8 @@ export function FleetScale() {
       rope.setAttribute("x2", String(tipX))
       rope.setAttribute("y2", String(tipY + ropeLen))
       hook.setAttribute("transform", `translate(${tipX} ${tipY + ropeLen})`)
+      tipLamp.setAttribute("cx", String(POS.crane + tipX))
+      tipLamp.setAttribute("cy", String(tipY))
 
       // Pistó: va de la torreta a la ploma, i els estabilitzadors toquen a terra abans d'aixecar
       const ramX = PX + 3 * Math.cos(rad)
@@ -295,6 +343,7 @@ export function FleetScale() {
       platLine.setAttribute("x1", String(-30 + shift))
       platEnd.setAttribute("x1", String(-30 + shift))
       platEnd.setAttribute("x2", String(-30 + shift))
+      tailLamp.setAttribute("transform", `translate(${shift} 0)`)
       platDim.setAttribute("opacity", String(range(ext, 0.2, 0.6)))
       beam.setAttribute("transform", `translate(0 ${-(1 - lower) * 40})`)
       beam.setAttribute("opacity", lower > 0 ? "1" : "0")
@@ -341,17 +390,13 @@ export function FleetScale() {
   return (
     <section ref={root} className="scale" id="vehicles" aria-labelledby="scale-title">
       <div className="scale__stage">
+        <div className="scale__sky scale__sky--dusk" aria-hidden="true" />
+        <div className="scale__sky scale__sky--night" aria-hidden="true" />
+        <Backdrop />
         <div className="scale__road">
           <canvas className="scale__ruler" aria-hidden="true" />
         </div>
         <svg className="scale__art" aria-hidden="true" width="100%" height="100%">
-          <FleetDefs />
-          <g data-ridge-far>
-            <path d={farRidge} fill="#A9DCF6" />
-          </g>
-          <g data-ridge>
-            <path d={ridge} fill="#74BFEA" />
-          </g>
           <g data-world>
             <g data-span={`${POS.van - 1} ${POS.van + 6}`}>
               <Van x={POS.van} />
@@ -367,6 +412,7 @@ export function FleetScale() {
             </g>
             <g data-span={`${POS.crane - 45} ${POS.crane + 50}`}>
               <CraneTruck x={POS.crane} />
+              <Person x={POS.crane - 2.2} />
             </g>
             <g data-span={`${POS.gondola - 2} ${POS.gondola + 22}`}>
               <Gondola x={POS.gondola} />
@@ -376,6 +422,7 @@ export function FleetScale() {
             </g>
           </g>
         </svg>
+        <FleetLights pos={POS} />
         <div className="scale__copy">
           <h2 id="scale-title" className="scale__title">
             La flota, a escala
@@ -391,7 +438,7 @@ export function FleetScale() {
           </ol>
           <div className="scale__outro">
             <p className="scale__outro-text">Digui'ns què cal moure i triem el vehicle.</p>
-            <a className="btn btn--navy" href="#contacte">
+            <a className="btn btn--white" href="#contacte">
               Demanar pressupost
             </a>
           </div>

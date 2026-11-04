@@ -12,6 +12,27 @@ export function Photos() {
     const mm = gsap.matchMedia()
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       const root = ref.current!
+      // Sortim de la nit de la flota: el dia arriba quan la primera foto ja és oberta
+      gsap.fromTo(
+        root,
+        { backgroundColor: "#06264a" },
+        {
+          backgroundColor: "#ffffff",
+          ease: "none",
+          scrollTrigger: { trigger: root, start: "top 30%", end: "top -35%", scrub: true },
+        },
+      )
+      root.querySelectorAll<HTMLElement>(".photos__pair .photos__frame").forEach((frame) => {
+        gsap.fromTo(
+          frame,
+          { clipPath: "inset(100% 0% 0% 0%)" },
+          {
+            clipPath: "inset(0% 0% 0% 0%)",
+            ease: "none",
+            scrollTrigger: { trigger: frame, start: "top 96%", end: "top 45%", scrub: true },
+          },
+        )
+      })
       gsap.fromTo(
         root.querySelector(".photos__lead"),
         { clipPath: "inset(14% 16% 14% 16%)" },

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { SplitText } from "gsap/SplitText"
 import { createCurtain, type CurtainGL } from "./curtain-gl"
 
 const CLOSED = 1.16
@@ -24,10 +25,35 @@ export function HeroCurtain() {
   const cover = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger)
+    gsap.registerPlugin(ScrollTrigger, SplitText)
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     let dead = false
     let stop = () => {}
+    let undoTitle = () => {}
+
+    /** El títol s'eixampla quan la tela li passa pel davant, línia a línia i sense canviar de talls. */
+    const stretchTitle = (delay: number) => {
+      document.fonts.ready.then(() => {
+        if (dead) return
+        const split = SplitText.create(".hero__title", { type: "lines", linesClass: "hero__line" })
+        const tween = gsap.fromTo(
+          split.lines,
+          { "--w": 62 },
+          {
+            "--w": 125,
+            delay,
+            duration: 1.7,
+            ease: "expo.out",
+            stagger: 0.14,
+            onComplete: () => split.revert(),
+          },
+        )
+        undoTitle = () => {
+          tween.kill()
+          split.revert()
+        }
+      })
+    }
 
     const dim = gsap.fromTo(
       ".hero__dim",
@@ -38,6 +64,13 @@ export function HeroCurtain() {
         scrollTrigger: { trigger: ".intro", start: "top bottom", end: "top top", scrub: true },
       },
     )
+    const lift = reduce
+      ? null
+      : gsap.to(".hero__title", {
+          yPercent: -22,
+          ease: "none",
+          scrollTrigger: { trigger: ".intro", start: "top bottom", end: "top top", scrub: true },
+        })
 
     if (!reduce && performance.now() < LATE_MS) {
       const canvas = addCanvas(host.current!)
@@ -45,8 +78,10 @@ export function HeroCurtain() {
         if (!curtain || dead || performance.now() > LATE_MS) {
           curtain?.destroy()
           canvas.remove()
+          if (!dead) stretchTitle(Math.max(0, 2.5 - performance.now() / 1000))
           return
         }
+        stretchTitle(1.25)
         const state = { hem: CLOSED }
         const draw = (t: number) => curtain.render(state.hem, t)
         draw(0)
@@ -68,13 +103,18 @@ export function HeroCurtain() {
           canvas.remove()
         }
       })
+    } else if (!reduce && performance.now() < 2400) {
+      stretchTitle(Math.max(0, 2.5 - performance.now() / 1000))
     }
 
     return () => {
       dead = true
       stop()
+      undoTitle()
       dim.scrollTrigger?.kill()
       dim.kill()
+      lift?.scrollTrigger?.kill()
+      lift?.kill()
     }
   }, [])
 

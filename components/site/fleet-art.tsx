@@ -106,7 +106,11 @@ export function FleetDefs() {
 }
 
 function Wheel({ x, r = 0.52 }: { x: number; r?: number }) {
-  return <use href="#fa-wheel" transform={`translate(${x} ${-r}) scale(${r})`} />
+  return (
+    <g transform={`translate(${x} ${-r}) scale(${r})`}>
+      <use href="#fa-wheel" data-wheel />
+    </g>
+  )
 }
 
 /** Aleta sobre una roda. */
@@ -422,8 +426,8 @@ export function Articulated({ x }: { x: number }) {
   )
 }
 
-export function CraneTruck({ x }: { x: number }) {
-  // Pivot de la ploma: el mou fleet-scale.tsx pels data-*
+export function CraneTruck({ x, parked = false }: { x: number; parked?: boolean }) {
+  // Pivot de la ploma: el mou fleet-scale.tsx pels data-*. Aparcada, queda plegada sobre la caixa.
   const px = 7.1
   const py = -3
   const sections = [0.82, 0.7, 0.58, 0.47, 0.36]
@@ -441,19 +445,19 @@ export function CraneTruck({ x }: { x: number }) {
       <path d="M0.2 -2.4H0.94V-2.28H0.2Z" fill={C.ink} />
       {/* Estabilitzadors: baixen abans d'aixecar la ploma */}
       {[0.75, 6.75].map((ox) => (
-        <g key={ox} data-outrigger>
+        <g key={ox} data-outrigger transform={parked ? "translate(0 -0.62)" : undefined}>
           <rect x={ox} y={-1.3} width={0.24} height={1.2} fill={url("alu")} />
           <rect x={ox - 0.26} y={-0.11} width={0.76} height={0.11} rx={0.02} fill={C.ink} />
         </g>
       ))}
       {/* Pistó de la ploma */}
-      <line data-ram-rod stroke="#DDE4EA" strokeWidth={0.1} />
-      <line data-ram-cyl stroke={C.ink} strokeWidth={0.19} />
+      <line data-ram-rod stroke="#DDE4EA" strokeWidth={0.1} {...(parked ? { x1: 5.3, y1: -1.62, x2: 4.1, y2: -3.16 } : {})} />
+      <line data-ram-cyl stroke={C.ink} strokeWidth={0.19} {...(parked ? { x1: 5.3, y1: -1.62, x2: 4.22, y2: -3 } : {})} />
       {/* Corona i torreta */}
       <rect x={5.7} y={-1.74} width={2.2} height={0.2} fill={C.ink} />
       <path d={`M5.9 -1.74H7.9V-2.2L${px + 0.52} ${py - 0.48}H${px - 0.62}L5.9 -2.3Z`} fill={url("paint")} />
       <path d="M6.08 -1.92H7.7" stroke={C.lonaLight} strokeWidth={0.03} />
-      <g data-boom>
+      <g data-boom transform={parked ? `rotate(-177 ${px} ${py})` : undefined}>
         {/* Els trams van de dins cap a fora; fleet-scale.tsx els fa lliscar */}
         {sections
           .slice()
@@ -485,12 +489,14 @@ export function CraneTruck({ x }: { x: number }) {
           </text>
         </g>
       </g>
-      <line data-rope stroke={C.ink} strokeWidth={0.06} />
-      <g data-hook>
-        <rect x={-0.3} y={0} width={0.6} height={0.66} rx={0.1} fill={url("amber")} />
-        <circle cx={0} cy={0.3} r={0.13} fill={C.ink} />
-        <path d="M0 0.66V0.86Q0.27 0.9 0.24 1.14Q0.16 1.4 -0.14 1.3" fill="none" stroke={C.ink} strokeWidth={0.1} />
-      </g>
+      {!parked && <line data-rope stroke={C.ink} strokeWidth={0.06} />}
+      {!parked && (
+        <g data-hook>
+          <rect x={-0.3} y={0} width={0.6} height={0.66} rx={0.1} fill={url("amber")} />
+          <circle cx={0} cy={0.3} r={0.13} fill={C.ink} />
+          <path d="M0 0.66V0.86Q0.27 0.9 0.24 1.14Q0.16 1.4 -0.14 1.3" fill="none" stroke={C.ink} strokeWidth={0.1} />
+        </g>
+      )}
       <Guard x={1.9} />
       <Guard x={3.1} />
       <Cab x={cx} kind="day" />
@@ -537,7 +543,7 @@ function Excavator({ x, y }: { x: number; y: number }) {
   )
 }
 
-export function Gondola({ x }: { x: number }) {
+export function Gondola({ x, bare = false }: { x: number; bare?: boolean }) {
   const cx = 18.42
   return (
     <g transform={`translate(${x} 0)`}>
@@ -570,10 +576,14 @@ export function Gondola({ x }: { x: number }) {
       <Wheel x={16.3} />
       <Wheel x={17.5} />
       <Wheel x={cx + 1.38} />
-      <path d="M13.5 -0.03V-0.6M13.3 -0.03H13.7M13.3 -0.6H13.7" stroke={C.cab} strokeWidth={0.05} />
-      <text x={13.85} y={-0.17} fontSize={0.4} fontWeight={700} fill={C.cab}>
-        0,60 m
-      </text>
+      {!bare && (
+        <>
+          <path d="M13.5 -0.03V-0.6M13.3 -0.03H13.7M13.3 -0.6H13.7" stroke={C.cab} strokeWidth={0.05} />
+          <text x={13.85} y={-0.17} fontSize={0.4} fontWeight={700} fill={C.cab}>
+            0,60 m
+          </text>
+        </>
+      )}
     </g>
   )
 }
@@ -617,10 +627,10 @@ export function ExtendablePlatform({ x }: { x: number }) {
       <Wheel x={1.7} />
       <Wheel x={4.38} />
       <g data-platform-dim opacity={0}>
-        <line data-platform-dim-line x1={-30} x2={1} y1={-6.2} y2={-6.2} stroke={C.navy} strokeWidth={0.1} />
-        <line x1={1} x2={1} y1={-6.6} y2={-5.8} stroke={C.navy} strokeWidth={0.1} />
-        <line data-platform-dim-end x1={-30} x2={-30} y1={-6.6} y2={-5.8} stroke={C.navy} strokeWidth={0.1} />
-        <text x={-14.5} y={-6.7} textAnchor="middle" fontSize={1.5} fontWeight={700} fill={C.navy}>
+        <line data-platform-dim-line x1={-30} x2={1} y1={-6.2} y2={-6.2} stroke="#fff" strokeWidth={0.1} />
+        <line x1={1} x2={1} y1={-6.6} y2={-5.8} stroke="#fff" strokeWidth={0.1} />
+        <line data-platform-dim-end x1={-30} x2={-30} y1={-6.6} y2={-5.8} stroke="#fff" strokeWidth={0.1} />
+        <text x={-14.5} y={-6.7} textAnchor="middle" fontSize={1.5} fontWeight={700} fill="#fff">
           30 m
         </text>
       </g>
@@ -648,24 +658,48 @@ function Girder({ x0, x1, y }: { x0: number; x1: number; y: number }) {
   )
 }
 
-/** Perfil de Montserrat: agulles arrodonides, la muntanya que Esparreguera té al costat. */
-export function montserratPath(width: number, height: number, start = 7) {
-  let seed = start
-  const rnd = () => {
-    seed = (seed * 16807) % 2147483647
-    return (seed - 1) / 2147483646
-  }
-  let x = -40
-  let d = `M${x} ${height}`
-  while (x < width + 40) {
-    const massif = Math.pow(0.5 + 0.5 * Math.sin((x / width) * Math.PI * 5 + 0.6 + start), 1.4)
-    const w = 13 + rnd() * 22
-    const top = height * (0.2 + 0.55 * (1 - massif) + rnd() * 0.08)
-    const notch = Math.min(height, top + 26 + rnd() * 50)
-    const n = (v: number) => v.toFixed(1)
-    d += `L${n(x)} ${n(notch)}`
-    d += `C${n(x)} ${n(top)} ${n(x + w)} ${n(top)} ${n(x + w)} ${n(notch)}`
-    x += w
-  }
-  return `${d}L${x.toFixed(1)} ${height}Z`
+/** Carretó elevador amb un palet: el vehicle de la nau. */
+export function Forklift({ x }: { x: number }) {
+  return (
+    <g transform={`translate(${x} 0)`}>
+      <Shadow x0={0.1} x1={3.9} />
+      {/* Pal i forquilles */}
+      <rect x={2.62} y={-3.1} width={0.14} height={3.02} fill={url("dark")} />
+      <rect x={2.8} y={-2.5} width={0.08} height={2.42} fill={url("alu")} />
+      <path d="M2.84 -1.28V-0.16H4.05" fill="none" stroke={C.steel} strokeWidth={0.09} />
+      {/* Palet i càrrega */}
+      <rect x={2.95} y={-0.32} width={1.2} height={0.05} fill={C.alu} />
+      <path d="M2.97 -0.27H3.11V-0.12H2.97ZM3.48 -0.27H3.62V-0.12H3.48ZM3.99 -0.27H4.13V-0.12H3.99Z" fill={C.steel} />
+      <rect x={3} y={-1.42} width={1.1} height={1.1} fill={url("lona")} />
+      <path d="M3 -0.87H4.1M3.55 -1.42V-0.32" stroke={C.lonaLight} strokeWidth={0.03} />
+      {/* Cos i contrapès */}
+      <path d="M0.1 -0.36V-1.08Q0.1 -1.3 0.32 -1.3H2.2L2.56 -0.36Z" fill={url("paint")} />
+      <path d="M0.1 -0.36V-0.84H0.72V-0.36Z" fill={url("dark")} />
+      <rect x={0.98} y={-1.68} width={0.14} height={0.4} fill={C.ink} />
+      <path d="M0.98 -1.68H1.5V-1.56H1.1L1.06 -1.3H0.98Z" fill={C.ink} />
+      {/* Protecció de sostre */}
+      <path d="M0.62 -1.3L0.78 -2.32H2.06L2.34 -1.3" fill="none" stroke={C.ink} strokeWidth={0.08} />
+      <rect x={0.74} y={-2.36} width={1.36} height={0.06} fill={C.ink} />
+      <path d="M1.9 -1.5L1.66 -1.74" stroke={C.ink} strokeWidth={0.05} />
+      <rect x={0.52} y={-2.52} width={0.14} height={0.12} rx={0.03} fill={url("amber")} />
+      <Wheel x={0.7} r={0.3} />
+      <Wheel x={2.14} r={0.38} />
+    </g>
+  )
+}
+
+/** Una persona d'1,75 m, amb casc i armilla: la referència d'escala al costat de la grua. */
+export function Person({ x }: { x: number }) {
+  return (
+    <g transform={`translate(${x} 0)`}>
+      <ellipse cx={0} cy={0.03} rx={0.5} ry={0.07} fill={url("shadow")} />
+      <path d="M-0.17 -0.86L-0.2 -0.03H-0.05L0 -0.62L0.05 -0.03H0.2L0.17 -0.86Z" fill={C.navy} />
+      <path d="M-0.2 -0.03H-0.03V0H-0.24ZM0.03 -0.03H0.2L0.24 0H0.03Z" fill={C.ink} />
+      <path d="M-0.2 -1.42Q-0.2 -1.46 -0.14 -1.46H0.14Q0.2 -1.46 0.2 -1.42L0.19 -0.84H-0.19Z" fill={C.amber} />
+      <path d="M-0.19 -1.12H0.19M-0.19 -1.02H0.19" stroke={C.cab} strokeWidth={0.035} />
+      <path d="M-0.21 -1.42L-0.29 -0.86M0.21 -1.42L0.29 -0.86" stroke={C.navy} strokeWidth={0.095} strokeLinecap="round" />
+      <circle cx={0} cy={-1.59} r={0.105} fill="#E7C4A5" />
+      <path d="M-0.125 -1.61A0.125 0.125 0 0 1 0.125 -1.61H0.17V-1.585H-0.125Z" fill={C.cab} />
+    </g>
+  )
 }
