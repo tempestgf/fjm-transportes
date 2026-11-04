@@ -1,8 +1,10 @@
-import { Curtain } from "./curtain"
+import { HeroCurtain } from "./curtain"
 
 export function Hero() {
   return (
-    <section className="hero" id="inici">
+    <>
+    <span id="inici" />
+    <section className="hero">
       <img
         className="hero__photo"
         src="/media/web/truck-33.webp"
@@ -27,7 +29,9 @@ export function Hero() {
           </div>
         </div>
       </div>
-      <Curtain mode="open" />
+      <div className="hero__dim" aria-hidden="true" />
+      <HeroCurtain />
     </section>
+    </>
   )
 }

@@ -24,9 +24,9 @@ export function Photos() {
       root.querySelectorAll<HTMLElement>(".photos__frame img").forEach((img) => {
         gsap.fromTo(
           img,
-          { yPercent: -7 },
+          { yPercent: -4.5 },
           {
-            yPercent: 7,
+            yPercent: 4.5,
             ease: "none",
             scrollTrigger: { trigger: img.parentElement, start: "top bottom", end: "bottom top", scrub: true },
           },
@@ -43,7 +43,7 @@ export function Photos() {
           src="/media/web/truck-26.webp"
           alt="Tractora blanca amb semiremolc de lona blava a l'exterior de la nau"
           width={1600}
-          height={1067}
+          height={1068}
           loading="lazy"
         />
       </figure>
@@ -54,7 +54,7 @@ export function Photos() {
               src="/media/web/truck-14.webp"
               alt="Camió rígid amb lona blava sortint de la nau de FJM Transportes"
               width={1400}
-              height={933}
+              height={934}
               loading="lazy"
             />
           </div>
@@ -66,7 +66,7 @@ export function Photos() {
               src="/media/web/truck-31.webp"
               alt="Tractora de FJM Transportes vista de cara al polígon de La Magarola"
               width={1400}
-              height={933}
+              height={934}
               loading="lazy"
             />
           </div>

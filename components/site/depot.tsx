@@ -3,9 +3,6 @@
 import { useEffect, useRef } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { CURTAIN_PANELS, Curtain } from "./curtain"
-
-const FOLD = 0.075
 
 export function Depot() {
   const ref = useRef<HTMLElement>(null)
@@ -26,34 +23,15 @@ export function Depot() {
           scrollTrigger: { trigger: ".depot__area", start: "top 85%", end: "top 30%", scrub: true },
         },
       )
-
-      // La lona es torna a tancar sobre la nau i dona pas al contacte, del mateix blau
-      const frame = root.querySelector<HTMLElement>(".depot__frame")!
-      const panels = gsap.utils.toArray<HTMLElement>(".curtain__panel", frame)
-      const pw = () => frame.offsetWidth / CURTAIN_PANELS
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: frame,
-          pin: true,
-          start: "top top",
-          end: "+=130%",
-          scrub: true,
-          invalidateOnRefresh: true,
+      gsap.fromTo(
+        root.querySelector(".depot__strip img"),
+        { yPercent: -4.5 },
+        {
+          yPercent: 4.5,
+          ease: "none",
+          scrollTrigger: { trigger: ".depot__strip", start: "top bottom", end: "bottom top", scrub: true },
         },
-      })
-      tl.to({}, { duration: 0.35 })
-      panels.forEach((panel, i) => {
-        tl.fromTo(
-          panel,
-          {
-            x: () =>
-              frame.offsetWidth - (CURTAIN_PANELS - i) * pw() * FOLD - i * pw(),
-            scaleX: FOLD,
-          },
-          { x: 0, scaleX: 1, duration: 1, ease: "power2.inOut" },
-          0.35 + i * 0.06,
-        )
-      })
+      )
     })
     return () => mm.revert()
   }, [])
@@ -92,15 +70,14 @@ export function Depot() {
           <dd>Càmeres de seguretat i alarmes de reacció immediata.</dd>
         </div>
       </dl>
-      <div className="depot__frame">
+      <div className="depot__strip">
         <img
-          src="/media/web/truck-03.webp"
-          alt="Tres camions de FJM Transportes aparcats davant de la nau d'Esparreguera"
+          src="/media/web/truck-28.webp"
+          alt="Tràiler de FJM Transportes amb la lona blava, davant de la nau d'Esparreguera"
           width={2000}
           height={1334}
           loading="lazy"
         />
-        <Curtain mode="scroll" />
       </div>
     </section>
   )
